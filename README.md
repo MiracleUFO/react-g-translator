@@ -2,7 +2,8 @@
 A modern, *free*, *lightweight* npm package for translating react apps (pages and components) on the fly. *No API keys or language list files* are required.
 
 ## Features
-- Covers multiple use cases (see ##Usages)
+- Covers multiple use cases (see [Usage](#usage))
+ - Allows to create custom language change component
 - Auto language detection
 - Spelling and Language correction
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
@@ -14,10 +15,13 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 ```npm install react-g-translator```
 
 or with yarn
+
 ```yarn add react-g-translator```
 
 ## Usage
-```jsx: To translate whole component.
+
+### To translate whole component:
+```jsx
 import Translator from 'react-auto-translate';
 
 return (
@@ -79,62 +83,75 @@ return (
 
 ## API
 ### Props
- - `from`: Language text is provided in. 
-      *Type string* [If string provided is not found here, will default to "en"](https://cloud.google.com/translate/docs/languages).
-      Defaults to "en".
-      Can be overriden by `setLanguageFrom` hook.
+ - `from`: Language the text(s) is provided in.
+    - Defaults to "en".
+    - *Type string*. If string provided is not found [here](https://cloud.google.com/translate/docs/languages), will default to "en".
+    - Overriden by [`setLanguageFrom`](#hook-setlanguagefromfrom) hook.
+
 
   - `to`: Language to translate to.
-      *Type string* [If string provided is not found here, will default to  *user's current browser langauge setting*.](https://cloud.google.com/translate/docs/languages).
-      Defaults to *user's current browser langauge setting*.
-      Can be overriden by `setLanguageTo` hook.
+    - Defaults to *user's current browser langauge setting*.
+    - *Type string*. If string provided is not found [here](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser langauge setting*.
+    - Overriden by [`setLanguageTo`](#hook-setlanguagetoto) hook.
 
 
 ### Wrapper: `<Translator />` ###
   *Type:* React functional component
+
   *Props:*
-  - `from`
-  - `to`
+  - [`from`](#props)
+  - [`to`](#props)
+
   *Note:* 
   - Directly wraps a valid Provider or a jsx parent (not text.)
 
 
-### Wrapper: `<Translate>` ###
+### Wrapper: `<Translate />` ###
   *Type:* React functional component
+
   *Props:*
-  - `from`
-  - `to`
+  - [`from`](#props)
+  - [`to`](#props)
+  
   *Note:* 
   - Directly wraps text.
 
 
-## Hook `useTranslate` ###
+### Hook `useTranslate` ###
   *Type*: React hook
+
   *Returns*: 
-  - `setLanguageFrom`
-  - `setLanguageTo`
-  - `translate`
+  - [`setLanguageFrom`](#hook-setlanguagefromfrom)
+  - [`setLanguageTo`](#hook-setlanguagetoto)
+  - [`translate`](#hook-translatetext-from-to)
 
 
-## Hook `setLanguageFrom(from)` ###
+### Hook `setLanguageFrom(from)` ###
 Overrides `from` prop in all <Translator> and <Translate> components within the app.
+
 *Type:* React hook
+
 *Params:*
-- `from`
+- [`from`](#props) *required*
 
 
-## Hook `setLanguageTo(to)` ###
+### Hook `setLanguageTo(to)` ###
 Overrides `to` prop in all <Translator> and <Translate> components within the app.
+
 *Type:* React hook
+
 *Params:*
-- `to`
+- [`to`](#props) *required*
 
 
-## Hook `translate(text, from, to)` ###
+### Hook `translate(text, from, to)` ###
 Translates text and returns translation.
+
 *Type:* Function
+
 *Returns*: string
+
 *Params:*
-- `text`: *Type string* *required*
-- `from`
-- `to`
+- `text`: *Type string*, *required*
+- [`from`](#props)
+- [`to`](#props)
