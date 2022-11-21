@@ -1,5 +1,5 @@
 {
-  "name": "react-g-translator",
+  "name": "@miraj/react-g-translator",
   "version": "0.0.0-development",
   "description": "A modern, free, lightweight npm package for translating react apps. No API keys or language list files are required.",
   "exports": {
@@ -37,8 +37,7 @@
     "access": "public"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/snyk-labs/modern-npm-package.git"
+    "type": "git"
   },
   "keywords": [
     "npm",
@@ -56,13 +55,33 @@
   "author": "Miracle Ufodiama",
   "license": "MIT",
   "devDependencies": {
-    "@types/mocha": "^9.1.1",
-    "mocha": "^10.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.7.4",
-    "semantic-release": "^19.0.3",
     "@types/chai": "^4.3.3",
+    "@types/google-translate-api": "^2.3.2",
+    "@types/mocha": "^9.1.1",
+    "@types/react": "^18.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
     "chai": "^4.3.6",
-    "google-translate-api": "2.3.0"
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "mocha": "^10.0.0",
+    "prettier": "^2.7.1",
+    "semantic-release": "^19.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "google-translate-api": "2.3.0",
+    "react": "^18.2.0",
+    "react-query": "^3.39.2"
   }
 }
