@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import translate from 'google-translate-api';
-//import detectBrowserLanguage from 'detect-browser-language'
+import { translate } from '@vitalets/google-translate-api';
 
 const getTranslation = async (
   text: string, 
