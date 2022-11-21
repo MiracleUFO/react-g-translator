@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import translate from 'google-translate-api';
+//import detectBrowserLanguage from 'detect-browser-language'
 
-const getTranslation = async (text: string, to: string, from: string) : Promise<string> => {
+const getTranslation = async (
+  text: string, 
+  to?: language, 
+  from?: language,
+) : Promise<string> => {
   try {
     const translation = await translate(text, { from, to });
     return translation.text;
@@ -11,19 +17,33 @@ const getTranslation = async (text: string, to: string, from: string) : Promise<
   }
 };
 
-const useTranslation = (text: string, to: string, from: string) => {
-  const {
-      data,
-      error,
-      isError,
-      isLoading
-  } = useQuery<string>('translation', () =>  getTranslation(text, to, from));
+const useTranslation = (
+  text: string,
+  to?: language,
+  from?: language
+) => {
+  const [languageFrom, setLanguageFrom] = useState<language>('en');
+  const languageFromToSend = from ? from : languageFrom;
 
+  const defaultBrowserLanguage : language 
+  = window?.navigator?.language.startsWith('zh') ? window?.navigator?.language as language : window?.navigator?.language.split('-')[0] as language;
+  const [languageTo, setLanguageTo] = useState<language>(defaultBrowserLanguage);
+  const languageToToSend = to ? to : languageTo;
+
+  const {
+    data,
+    error,
+    isError,
+    isLoading
+  } 
+  = useQuery<string>('translation', () =>  getTranslation(text, languageToToSend, languageFromToSend));
   return {
-      data,
-      error,
-      isError,
-      isLoading
+    data,
+    error,
+    isError,
+    isLoading,
+    setLanguageFrom,
+    setLanguageTo,
   }
 };
 
