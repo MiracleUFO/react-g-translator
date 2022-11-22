@@ -1,14 +1,15 @@
 import React, { useState, useContext, createContext, ReactNode } from 'react';
+import language from '../types/language';
 
 const defaultBrowserLanguage : language 
-    = window?.navigator?.language.startsWith('zh') 
-    ? window?.navigator?.language as language 
-    : window?.navigator?.language.split('-')[0] as language
+    = global.window?.navigator?.language.startsWith('zh') 
+    ? global.window?.navigator?.language as language 
+    : global.window?.navigator?.language.split('-')[0] as language
 ;
 
 const LanguageContext = createContext({
-  languageFrom: 'en' as language | null | undefined,
-  languageTo: defaultBrowserLanguage as language | null | undefined,
+  languageFrom: 'en' as language | undefined,
+  languageTo: defaultBrowserLanguage as language | undefined,
   setLanguageFrom: (_from: language) => {},
   setLanguageTo: (_to: language) => {},
   resetLanguages: () => {},
@@ -17,8 +18,8 @@ const LanguageContext = createContext({
 });
 
 export const LanguageProvider = ({ children }: { children: ReactNode}) => {
-    const [languageFrom, setLanguageFrom] = useState<language | null>();
-    const [languageTo, setLanguageTo] = useState<language | null>();
+    const [languageFrom, setLanguageFrom] = useState<language>();
+    const [languageTo, setLanguageTo] = useState<language>();
 
     const resetLanguages = () => {
         setLanguageFrom('en');

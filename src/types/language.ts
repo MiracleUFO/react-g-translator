@@ -105,3 +105,5 @@ type language =
 'yo' | // -> Yoruba,
 'zu' // -> Zulu
 ;
+
+export default language;

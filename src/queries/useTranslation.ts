@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { translate } from '@vitalets/google-translate-api';
+import language from '../types/language';
+import { useLanguageContext } from '../context/languageContext';
 
 const getTranslation = async (
   text: string, 
@@ -21,28 +23,19 @@ const useTranslation = (
   to?: language,
   from?: language
 ) => {
-  const [languageFrom, setLanguageFrom] = useState<language>('en');
-  const languageFromToSend = from ? from : languageFrom;
-
-  const defaultBrowserLanguage : language 
-  = window?.navigator?.language.startsWith('zh') ? window?.navigator?.language as language : window?.navigator?.language.split('-')[0] as language;
-  const [languageTo, setLanguageTo] = useState<language>(defaultBrowserLanguage);
-  const languageToToSend = to ? to : languageTo;
-
+  const { languageFrom, languageTo } = useLanguageContext();
   const {
     data,
     error,
     isError,
     isLoading
   } 
-  = useQuery<string>('translation', () =>  getTranslation(text, languageToToSend, languageFromToSend));
+  = useQuery<string>('translation', () =>  getTranslation(text, to || languageTo, from || languageFrom));
   return {
     data,
     error,
     isError,
     isLoading,
-    setLanguageFrom,
-    setLanguageTo,
   }
 };
 
