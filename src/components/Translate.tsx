@@ -1,5 +1,7 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+
+import language from '../types/language';
 import { LanguageProvider } from '../context/languageContext';
 import useTranslation from '../queries/useTranslation';
 
