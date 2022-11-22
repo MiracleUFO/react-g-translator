@@ -1,13 +1,13 @@
-import React, { ReactElement} from 'react';
+import 'mocha';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import { expect, assert } from 'chai';
-import 'mocha';
+import { expect } from 'chai';
 var jsdom = require('mocha-jsdom');
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Translate } from '../src/components/Translate';
-import { translate } from '@vitalets/google-translate-api';
+import { translate } from '../src/scripts/translate';
 
 global.document = jsdom({
   url: 'http://localhost:3000/'
@@ -16,7 +16,7 @@ global.document = jsdom({
 let rootContainer: HTMLElement | null;
 
 beforeEach(() => {
-  rootContainer = document.createElement('div');
+  rootContainer = document.createElement('h1');
   document.body.appendChild(rootContainer);
 });
 
@@ -26,8 +26,9 @@ afterEach(() => {
   rootContainer = null;
 });
 
-describe('App Component Testing', () => {
-  it('Renders Hello in French', (done) => {
+describe('Translate Component Testing', () => { 
+  // May fail due to poor network conditions, but does not in good connections
+  it('Translate method gets translation string, and <Translate /> Renders Hello in French', (done) => {
     const queryClient = new QueryClient();
     act(() => {
       ReactDOM.render(
@@ -40,7 +41,9 @@ describe('App Component Testing', () => {
 
     translate('Hello', { from: 'en', to: 'fr' })
     .then(res => {
-      expect(res.text).to.include('Bonjour');
+      expect(res).to.include('Bonjour');
+    })
+    .then(() => {
       if (rootContainer) {
         expect(rootContainer?.textContent).to.include('Bonjour');
       }

@@ -144,7 +144,7 @@ Overrides `to` prop in all <Translator> and <Translate> components within the ap
 - [`to`](#props) *required*
 
 
-### Hook `translate(text, from, to)` ###
+### Method `translate(text, from, to)` ###
 Translates text and returns translation.
 
 *Type:* Function
@@ -153,5 +153,5 @@ Translates text and returns translation.
 
 *Params:*
 - `text`: *Type string*, *required*
-- [`from`](#props)
-- [`to`](#props)
+- [`from`](#props)  *required*
+- [`to`](#props)  *required*

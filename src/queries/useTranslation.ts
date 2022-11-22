@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { translate } from '@vitalets/google-translate-api';
 import language from '../types/language';
 import { useLanguageContext } from '../context/languageContext';
 
-const getTranslation = async (
+export const getTranslation = async (
   text: string, 
   to?: language, 
   from?: language,

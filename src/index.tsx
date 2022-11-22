@@ -1,5 +1,6 @@
 import { useLanguageContext } from './context/languageContext';
 export * from './components/Translate';
+export * from './scripts/translate';
 const {
   languageFrom, 
   languageTo,
@@ -17,4 +18,4 @@ export {
   resetFrom,
   resetTo,
   resetLanguages
-}
+};
