@@ -14,7 +14,7 @@ export const Translator = ({ children, to, from } : {
   from?: language,
 }) => {
   let htmlString = ReactDOMServer.renderToStaticMarkup(children);
-  const parser = new global.window.DOMParser();
+  const parser = new window.DOMParser();
   const doc = parser.parseFromString(htmlString, 'text/html');
 
   if (doc.childNodes.length > 1) {
