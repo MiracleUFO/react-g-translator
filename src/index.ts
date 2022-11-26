@@ -1,5 +1,6 @@
 import { useLanguageContext } from './context/languageContext';
 export * from './components/Translate';
+export * from './components/Translator';
 export * from './scripts/translate';
 const {
   languageFrom, 

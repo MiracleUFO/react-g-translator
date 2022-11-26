@@ -21,7 +21,7 @@ or with yarn
 ## Usage
 
 ### To translate whole component:
-```jsx
+```jsx (index.jsx)
 import Translator from 'react-auto-translate';
 
 return (
@@ -29,9 +29,7 @@ return (
       from='en'
       to='es'
     >
-    <Component>
-      ...
-    </Component>
+    <App />
   </Translator>
 );
 ```
