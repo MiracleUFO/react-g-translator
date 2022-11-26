@@ -25,7 +25,7 @@
     "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
     "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
     "semantic-release": "semantic-release",
-    "test": "mocha",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "prepack": "npm run build"
   },
   "release": {
