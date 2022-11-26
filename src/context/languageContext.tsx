@@ -2,9 +2,9 @@ import React, { useState, useContext, createContext, ReactNode } from 'react';
 import language from '../types/language';
 
 const defaultBrowserLanguage : language 
-    = global.window?.navigator?.language.startsWith('zh') 
-    ? global.window?.navigator?.language as language 
-    : global.window?.navigator?.language.split('-')[0] as language
+    = window?.navigator?.language.startsWith('zh') 
+    ? window?.navigator?.language as language 
+    : window?.navigator?.language.split('-')[0] as language
 ;
 
 const LanguageContext = createContext({
