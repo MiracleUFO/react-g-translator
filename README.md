@@ -21,7 +21,7 @@ or with yarn
 ## Usage
 
 ### To translate whole component:
-```jsx
+```jsx (index.jsx)
 import Translator from 'react-auto-translate';
 
 return (
@@ -29,9 +29,7 @@ return (
       from='en'
       to='es'
     >
-    <Component>
-      ...
-    </Component>
+    <App />
   </Translator>
 );
 ```
@@ -144,7 +142,7 @@ Overrides `to` prop in all <Translator> and <Translate> components within the ap
 - [`to`](#props) *required*
 
 
-### Hook `translate(text, from, to)` ###
+### Method `translate(text, from, to)` ###
 Translates text and returns translation.
 
 *Type:* Function
@@ -153,5 +151,5 @@ Translates text and returns translation.
 
 *Params:*
 - `text`: *Type string*, *required*
-- [`from`](#props)
-- [`to`](#props)
+- [`from`](#props)  *required*
+- [`to`](#props)  *required*

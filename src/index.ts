@@ -1,14 +1,22 @@
-export function helloWorld() {
-  const message = 'Hello World from my example modern npm package!';
-  return message;
-}
-
-export function goodBye() {
-  const message = 'Goodbye from my example modern npm package!';
-  return message;
-}
-
-export default {
-  helloWorld,
-  goodBye,
+import { useLanguageContext } from './context/languageContext';
+export * from './components/Translate';
+export * from './components/Translator';
+export * from './scripts/translate';
+const {
+  languageFrom, 
+  languageTo,
+  setLanguageFrom,
+  setLanguageTo, 
+  resetFrom,
+  resetTo,
+  resetLanguages
+} = useLanguageContext();
+export {
+  languageFrom, 
+  languageTo,
+  setLanguageFrom,
+  setLanguageTo, 
+  resetFrom,
+  resetTo,
+  resetLanguages
 };
