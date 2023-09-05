@@ -1,4 +1,4 @@
-type language = 
+type language =
 'auto' | // -> Automatic (will automatically detect language),
 'af' | // -> Afrikaans,
 'sq' | // -> Albanian,
@@ -20,10 +20,10 @@ type language =
 'hr' | // -> Croatian,
 'cs' | // -> Czech,
 'da' | // -> 'Danish,
-'nl'  | // -> Dutch,
+'nl' | // -> Dutch,
 'en' | // -> English,
 'eo' | // -> Esperanto,
-'et'  | // -> Estonian,
+'et' | // -> Estonian,
 'tl' | // -> Filipino,
 'fi' | // -> Finnish,
 'fr' | // -> French,
@@ -46,7 +46,7 @@ type language =
 'ga' | // -> Irish,
 'it' | // -> Italian,
 'ja' | // -> Japanese,
-'jw'  | // -> Javanese',
+'jw' | // -> Javanese',
 'kn' | // -> Kannada,
 'kk' | // -> Kazakh,
 'km' | // -> Khmer,

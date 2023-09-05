@@ -8,7 +8,7 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 - Spelling and Language correction
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
 - Allows to set defualt language and destination language in code.
-- Translates entires pages and just text.
+- Translates entire pages and just text.
 - Allows for custom language list files. (Coming in v2.0.0)
 
 ## Install
@@ -21,8 +21,8 @@ or with yarn
 ## Usage
 
 ### To translate whole component:
-```jsx (index.jsx)
-import Translator from 'react-auto-translate';
+```jsx
+import Translator from 'react-g-translate';
 
 return (
   <Translator
@@ -36,7 +36,7 @@ return (
 
 ### To translate specific text inline:
 ```jsx
-import { Translate } from 'react-auto-translate';
+import { Translate } from 'react-g-translate';
 
 return (
   <div>
@@ -51,7 +51,7 @@ return (
 ### To change to and from props dynamically:
 Overrides `to` and `from` of the <Translator> and <Translate> wrappers across the app (*Use with care*).
 ```jsx
-import { useTranslate } from 'react-auto-translate';
+import { useTranslate } from 'react-g-translate';
 
 const { setLanguageFrom, setLanguageTo } = useTranslate();
 
@@ -67,7 +67,7 @@ return (
 
 ### To get translation of text directly:
 ```jsx
-import { useTranslate } from 'react-auto-translate';
+import { useTranslate } from 'react-g-translate';
 
 const { translate } = useTranslate();
 const helloInIgbo = translate('Hello', 'en', 'ig');

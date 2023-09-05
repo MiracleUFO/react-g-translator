@@ -2,15 +2,17 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import language from '../types/language';
+import { DEFAULT_PROPS } from '../constants';
+
 import { LanguageProvider } from '../context/languageContext';
 import useTranslation from '../queries/useTranslation';
 
 const queryClient = new QueryClient();
 
-export const Translate = ({ children, to, from } : {
+const Translate = ({ children, to, from } : {
   children: string,
-  to?: language,
   from?: language,
+  to?: language,
 }) => {
   const { data } = useTranslation(children, to, from);
   return (
@@ -21,3 +23,7 @@ export const Translate = ({ children, to, from } : {
     </QueryClientProvider>
   );
 };
+
+Translate.defaultProps = DEFAULT_PROPS;
+
+export default Translate;
