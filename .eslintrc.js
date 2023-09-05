@@ -32,11 +32,11 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
-    "react/function-component-definition": [
-      2,
+    'react/function-component-definition': [
+      'error',
       {
-        namedComponents: "arrow-function" | "function-expression" | "function-declaration",
-        unnamedComponents: "arrow-function" | "function-expression" | "function-declaration",
+        namedComponents: ['function-declaration', 'arrow-function'],
+        unnamedComponents: 'arrow-function',
       },
     ],
   },
