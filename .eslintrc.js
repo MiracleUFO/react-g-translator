@@ -11,7 +11,7 @@ module.exports = {
       },
       alias: {
         map: [['~', './src/']],
-        extensions: ['.ts', '.js', '.tsx'],
+        extensions: ['.ts', '.js', '.jsx', '.tsx'],
       },
     },
   },
@@ -32,6 +32,15 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'no-plusplus': 'off',
+    'no-console': ['warn', { allow: ['error', 'warn'] }],
+    'import/extensions': ['error', {
+      ts: 'never',
+      tsx: 'never',
+      js: 'never',
+      jsx: 'never',
+    }],
+    'react/jsx-filename-extension': 'off',
     'react/function-component-definition': [
       'error',
       {

@@ -3,5 +3,12 @@
     "jsx": "react",
     "strict": true,
     "esModuleInterop": true
-  }
+  },
+  "include": [
+    "*.eslintrc.js",
+    "*.ts",
+    "*.tsx",
+    "**/*.ts",
+    "**/*.tsx",
+  ],
 }

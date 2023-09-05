@@ -27,7 +27,7 @@
     "semantic-release": "semantic-release",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepack": "npm run build",
-    "lint": "npm eslint ."
+    "lint": "eslint src --ext .js,.jsx,.tsx,.ts --fix"
   },
   "release": {
     "branches": [
@@ -91,7 +91,6 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "@babel/preset-typescript": "^7.22.15",
     "@vitalets/google-translate-api": "^9.0.0",
     "async-wait-until": "^2.0.12",
     "react": "^18.2.0",
