@@ -1,23 +1,6 @@
-import { useLanguageContext } from './context/languageContext';
+import Translate from './components/Translate';
 
-export * from './components/Translate';
-export * from './components/Translator';
-export * from './scripts/translate';
-const {
-  languageFrom,
-  languageTo,
-  setLanguageFrom,
-  setLanguageTo,
-  resetFrom,
-  resetTo,
-  resetLanguages,
-} = useLanguageContext();
+export * from './utils/getTranslation';
 export {
-  languageFrom,
-  languageTo,
-  setLanguageFrom,
-  setLanguageTo,
-  resetFrom,
-  resetTo,
-  resetLanguages,
+  Translate,
 };
