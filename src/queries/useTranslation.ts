@@ -1,14 +1,12 @@
 import { useQuery } from 'react-query';
-
 import { useLanguageContext } from '../context/languageContext';
 import getTranslation from '../utils/getTranslation';
-
 import language from '../types/language';
 
 const useTranslation = (
   text: string,
-  to?: language,
   from?: language,
+  to?: language,
 ) => {
   const { languageFrom, languageTo } = useLanguageContext();
   const {
@@ -16,7 +14,7 @@ const useTranslation = (
     error,
     isError,
     isLoading,
-  } = useQuery<string>('translation', () => getTranslation(text, to || languageTo, from || languageFrom));
+  } = useQuery<string | undefined>('translation', () => getTranslation(text, from || languageFrom, to || languageTo));
 
   return {
     data,

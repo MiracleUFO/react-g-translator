@@ -41,6 +41,8 @@ module.exports = {
       js: 'never',
       jsx: 'never',
     }],
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
     'react/jsx-filename-extension': 'off',
     'react/function-component-definition': [
       'error',

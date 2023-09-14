@@ -1,6 +1,7 @@
 import Translate from './components/Translate';
+import getTranslation from './scripts/getTranslation';
 
-export * from './utils/getTranslation';
 export {
   Translate,
+  getTranslation,
 };

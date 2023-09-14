@@ -6,8 +6,8 @@ const determineRenderedText = (
   isLoading: boolean,
 ) => {
   if (shouldFallback && (isError || isLoading)) return text;
-  if (isError) return 'Error translating text';
-  if (isLoading) return 'Loading translation...';
+  if (isLoading) return text;
+  if (isError) return '';
   if (translatedText) return translatedText;
   return '';
 };

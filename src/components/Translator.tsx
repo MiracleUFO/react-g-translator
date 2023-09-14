@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { QueryClient, QueryClientProvider } from 'react-query';
 

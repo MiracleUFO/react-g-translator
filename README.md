@@ -25,10 +25,7 @@ or with yarn
 import Translator from 'react-g-translate';
 
 return (
-  <Translator
-      from='en'
-      to='es'
-    >
+  <Translator from='en' to='es'>
     <App />
   </Translator>
 );
@@ -42,35 +39,17 @@ return (
   <div>
     ...
     <p>Hello.</p>
-    <p><Translate from="en" to="fr">Hello in French.</Translate></p>
+    <p><Translate from='en' to='fr'>Hello in French.</Translate></p>
     ...
   </div>
 );
 ```
 
-### To change to and from props dynamically:
-Overrides `to` and `from` of the <Translator> and <Translate> wrappers across the app (*Use with care*).
-```jsx
-import { useTranslate } from 'react-g-translate';
-
-const { setLanguageFrom, setLanguageTo } = useTranslate();
-
-setLanguageFrom('es-US');
-setLanguageTo('ig');
-
-return (
-  <div>
-    <p><Translate from="en" to="fr">How are you?</Translate></p>
-  </div> // Here, "to" value is overriden under the hood to ig, and "from" value is overriden to "en-US" within the wrappers across the app.
-)
-```
-
 ### To get translation of text directly:
 ```jsx
-import { useTranslate } from 'react-g-translate';
+import { getTranslation } from 'react-g-translate';
 
-const { translate } = useTranslate();
-const helloInIgbo = translate('Hello', 'en', 'ig');
+const helloInIgbo = await getTranslation('Hello', 'en', 'ig');
 
 return (
   <div>
@@ -81,24 +60,28 @@ return (
 
 ## API
 ### Props
- - `from`: Language the text(s) is provided in.
+ - `from`: Language the text(s) is provided in. Optional.
     - Defaults to "en".
-    - *Type string*. If string provided is not found [here](https://cloud.google.com/translate/docs/languages), will default to "en".
-    - Overriden by [`setLanguageFrom`](#hook-setlanguagefromfrom) hook.
+    - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages), will default to "en".
+    - Overriden by [`setLanguageFrom`](#hook-setlanguagefrom) hook. (Coming in V2)
 
+  - `to`: Language to translate to. Optional.
+    - Defaults to *user's current browser language setting*.
+    - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser langauge setting*.
+    - Overriden by [`setLanguageTo`](#hook-setlanguageto) hook. (Coming in V2)
 
-  - `to`: Language to translate to.
-    - Defaults to *user's current browser langauge setting*.
-    - *Type string*. If string provided is not found [here](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser langauge setting*.
-    - Overriden by [`setLanguageTo`](#hook-setlanguagetoto) hook.
-
+ - `shouldFallback`: Should translation return original text if error in translation (fallback) or return empty string. Optional.
+    - Defaults to `true`.
+    - *Type boolean*. If not provided will default to true.
+    - **NOTE:** Returns exception when there is an error in translation if set to `false`.
 
 ### Wrapper: `<Translator />` ###
   *Type:* React functional component
 
   *Props:*
-  - [`from`](#props)
-  - [`to`](#props)
+  - [`from`](#props) *optional*
+  - [`to`](#props) *optional*
+  - [`shouldFallback`](#props) *optional*
 
   *Note:* 
   - Directly wraps a valid Provider or a jsx parent (not text.)
@@ -106,44 +89,17 @@ return (
 
 ### Wrapper: `<Translate />` ###
   *Type:* React functional component
+    *Note:* **Must directly wrap text.**
 
   *Props:*
-  - [`from`](#props)
-  - [`to`](#props)
+  - [`from`](#props) *optional*
+  - [`to`](#props) *optional*
+  - [`shouldFallback`](#props) *optional*
   
-  *Note:* 
-  - Directly wraps text.
-
-
-### Hook `useTranslate` ###
-  *Type*: React hook
-
-  *Returns*: 
-  - [`setLanguageFrom`](#hook-setlanguagefromfrom)
-  - [`setLanguageTo`](#hook-setlanguagetoto)
-  - [`translate`](#hook-translatetext-from-to)
-
-
-### Hook `setLanguageFrom(from)` ###
-Overrides `from` prop in all <Translator> and <Translate> components within the app.
-
-*Type:* React hook
-
-*Params:*
-- [`from`](#props) *required*
-
-
-### Hook `setLanguageTo(to)` ###
-Overrides `to` prop in all <Translator> and <Translate> components within the app.
-
-*Type:* React hook
-
-*Params:*
-- [`to`](#props) *required*
-
-
-### Method `translate(text, from, to)` ###
+### Method `getTranslation(text, from, to)` ###
 Translates text and returns translation.
+Best used if specific text(s) needs to be translated in-line without wrapping in provider.
+See [Usage](#to-get-translation-of-text-directly)
 
 *Type:* Function
 
@@ -151,5 +107,6 @@ Translates text and returns translation.
 
 *Params:*
 - `text`: *Type string*, *required*
-- [`from`](#props)  *required*
-- [`to`](#props)  *required*
+- [`from`](#props)  *optional*
+- [`to`](#props)  *optional*
+- [`shouldFallback`](#props) *optional*
