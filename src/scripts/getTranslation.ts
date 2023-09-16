@@ -18,21 +18,19 @@ const getTranslation = async (
   let translation: string | undefined = text;
 
   try {
-    translation = await getTranslationUtil(text, to, from);
+    translation = await getTranslationUtil(text, from, to);
 
     if (
       !translation
       && (typeof shouldFallback !== 'undefined' && !shouldFallback)
     ) throw new Error(TRANSLATION_NOT_FOUND_MESSAGE);
 
-    //  response success state
     return (
       translation
       || (shouldFallback && text)
       || ''
     );
   } catch (error) {
-    //  error state
     throw getErrorInTranslationMessage(error);
   }
 };
