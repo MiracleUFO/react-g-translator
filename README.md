@@ -78,18 +78,18 @@ return (
 ### Wrapper: `<Translator />` ###
   *Type:* React functional component
 
+  *Note:* **Directly wraps a valid Provider or a jsx parent (not text.)**
+
   *Props:*
   - [`from`](#props) *optional*
   - [`to`](#props) *optional*
   - [`shouldFallback`](#props) *optional*
 
-  *Note:* 
-  - Directly wraps a valid Provider or a jsx parent (not text.)
-
 
 ### Wrapper: `<Translate />` ###
   *Type:* React functional component
-    *Note:* **Must directly wrap text.**
+  
+  *Note:* **Must directly wrap text.**
 
   *Props:*
   - [`from`](#props) *optional*
