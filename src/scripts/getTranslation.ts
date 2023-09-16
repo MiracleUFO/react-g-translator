@@ -12,24 +12,12 @@ const getTranslation = async (
   text: string,
   from = DEFAULT_LANGUAGE_FROM,
   to = DEFAULT_BROWSER_LANGUAGE,
-  shouldFallback = true,
 ) : Promise<string> => {
-  //  loading state
-  let translation: string | undefined = text;
-
   try {
-    translation = await getTranslationUtil(text, from, to);
+    const translation = await getTranslationUtil(text, from, to);
 
-    if (
-      !translation
-      && (typeof shouldFallback !== 'undefined' && !shouldFallback)
-    ) throw new Error(TRANSLATION_NOT_FOUND_MESSAGE);
-
-    return (
-      translation
-      || (shouldFallback && text)
-      || ''
-    );
+    if (translation) return translation;
+    throw new Error(TRANSLATION_NOT_FOUND_MESSAGE);
   } catch (error) {
     throw getErrorInTranslationMessage(error);
   }

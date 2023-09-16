@@ -70,10 +70,10 @@ return (
     - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser langauge setting*.
     - Overriden by [`setLanguageTo`](#hook-setlanguageto) hook. (Coming in V2)
 
- - `shouldFallback`: Should translation return original text if error in translation (fallback) or return empty string. Optional.
+ - `shouldFallback`: Determines error handling. In <Wrapper /> displays original text when true, or empty string otherwise (when error). Optional.
     - Defaults to `true`.
     - *Type boolean*. If not provided will default to true.
-    - **NOTE:** Returns exception when there is an error in translation if set to `false`.
+    - **NOTE:** Will always log exception when there is an error in translation.
 
 ### Wrapper: `<Translator />` ###
   *Type:* React functional component
@@ -103,10 +103,16 @@ See [Usage](#to-get-translation-of-text-directly)
 
 *Type:* Function
 
-*Returns*: string
+*Returns*: string | Error
 
 *Params:*
 - `text`: *Type string*, *required*
 - [`from`](#props)  *optional*
 - [`to`](#props)  *optional*
-- [`shouldFallback`](#props) *optional*
+
+
+## SPECIAL CASES
+
+- [`from`](#props) and [`to`](#props) being the same will return original text (determined by google translation API.)
+- [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser langauge setting* respectively.
+- `text` is not in `from` language and google translate API cannot detect language automatically will return the original text. 

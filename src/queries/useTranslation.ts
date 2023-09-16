@@ -1,6 +1,8 @@
 import { useQuery } from 'react-query';
 import { useLanguageContext } from '../context/languageContext';
+
 import getTranslation from '../utils/getTranslation';
+import getErrorInTranslationMessage from '../utils/getErrorInTranslationMessage';
 import language from '../types/language';
 
 const useTranslation = (
@@ -14,7 +16,16 @@ const useTranslation = (
     error,
     isError,
     isLoading,
-  } = useQuery<string | undefined>('translation', () => getTranslation(text, from || languageFrom, to || languageTo));
+  } = useQuery<string | undefined>(
+    'translation',
+    () => getTranslation(text, from || languageFrom, to || languageTo),
+    {
+      //  more descriptive error than react-query error
+      onError: (err: unknown) => {
+        console.error(getErrorInTranslationMessage(err));
+      },
+    },
+  );
 
   return {
     data,
