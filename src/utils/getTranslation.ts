@@ -1,4 +1,6 @@
 import { translate } from '@vitalets/google-translate-api';
+
+import chunkRequest from './chunkRequest';
 import enableCors from './enableCorsAndLimitRate';
 import language from '../types/language';
 
@@ -7,12 +9,16 @@ const getTranslation = async (
   from?: language,
   to?: language,
 ) : Promise<string | undefined> => {
-  //  rate limit (1 request per second) and CORS policy overriding (if any)
-  enableCors(1);
+  const translateRequest = async (chunk: string | string[]) => {
+    //  CORS policy overriding (if any)
+    enableCors(1);
 
-  //  translating happens here. ✨ bing! ✨
-  const translation = await translate(text as string, { from, to });
-  return translation.text;
+    //  translating happens here. ✨ bing! ✨
+    const translation = await translate(chunk as string, { from, to });
+    return translation.text;
+  };
+
+  return chunkRequest(text, translateRequest, 5000);
 };
 
 export default getTranslation;

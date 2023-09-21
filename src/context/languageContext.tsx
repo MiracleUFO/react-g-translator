@@ -11,9 +11,7 @@ import language from '../types/language';
 const LanguageContext = createContext({
   languageFrom: DEFAULT_LANGUAGE_FROM,
   languageTo: DEFAULT_BROWSER_LANGUAGE,
-  // eslint-disable-next-line no-unused-vars
   setLanguageFrom: (_from: language) => {},
-  // eslint-disable-next-line no-unused-vars
   setLanguageTo: (_to: language) => {},
   resetLanguages: () => {},
   resetFrom: () => {},

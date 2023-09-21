@@ -1,4 +1,5 @@
 import getTranslation from '../scripts/getTranslation';
+import { CHAR_LIMIT_TEXT_ENGLISH, CHAR_LIMIT_TEXT_FRENCH } from './utils-test';
 import { HELLO_IN_ENGLISH, HELLO_IN_FRENCH, HELLO_IN_SPANISH } from '../constants';
 
 describe('Gets translation correctly when language to and from specified correctly', () => {
@@ -26,5 +27,15 @@ describe('Translate if language to and/or from NOT specified', () => {
     //  to work for your language please update HELLO_IN_ENGLISH on ln 29 below
     //  to be Hello in your default browser language
     expect(result).toBe(HELLO_IN_ENGLISH);
+  });
+});
+
+describe('No Character limit required check', () => {
+  it('should correctly translate text > 5000 characters', async () => {
+    const result = await getTranslation(CHAR_LIMIT_TEXT_ENGLISH.repeat(10), 'en', 'fr');
+
+    //  uses `toContain` instead of `toBe`
+    //  because google translate API tends to use synonyms when paragraphs repeat
+    expect(result).toContain(CHAR_LIMIT_TEXT_FRENCH);
   });
 });

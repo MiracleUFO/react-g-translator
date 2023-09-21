@@ -1,10 +1,16 @@
-import { render, waitFor } from './utils-test';
 import { Translate } from '../index';
+import {
+  CHAR_LIMIT_TEXT_ENGLISH,
+  CHAR_LIMIT_TEXT_FRENCH,
+  render,
+  waitFor,
+  getDefaultNormalizer,
+} from './utils-test';
 import { HELLO_IN_ENGLISH, HELLO_IN_FRENCH, HELLO_IN_SPANISH } from '../constants';
 import language from '../types/language';
 
 // eslint-disable-next-line max-len
-const renderTranslate = async (from?: language, to?: language, shouldFallback?: boolean, text?:string) => render(
+const renderTranslate = async (from?: language, to?: language, shouldFallback?: boolean, text?: string) => render(
   <Translate
     to={to}
     from={from}
@@ -46,5 +52,22 @@ describe('Translate if language to and/or from NOT specified', () => {
     //  to be Hello in your default browser language
     await waitFor(() => getByText(HELLO_IN_ENGLISH));
     expect(getByText(HELLO_IN_ENGLISH)).toBeInTheDocument();
+  });
+});
+
+describe('No Character limit required check', () => {
+  it('should correctly translate text > 5000 characters', async () => {
+    const { getByText } = await renderTranslate('en', 'fr', true, CHAR_LIMIT_TEXT_ENGLISH.repeat(10));
+
+    //  options to pass for both substrings & exact matches (which suffices)
+    const normalizerOpts = {
+      exact: false,
+      normalizer: getDefaultNormalizer({ trim: false, collapseWhitespace: false }),
+    };
+
+    //  does not check for repeating text exactly
+    //  because google translate API tends to use synonyms when paragraphs repeat
+    await waitFor(() => getByText(CHAR_LIMIT_TEXT_FRENCH, normalizerOpts));
+    expect(getByText(CHAR_LIMIT_TEXT_FRENCH, normalizerOpts)).toBeInTheDocument();
   });
 });

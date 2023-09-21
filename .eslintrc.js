@@ -51,5 +51,6 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
 };
