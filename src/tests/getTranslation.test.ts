@@ -1,8 +1,15 @@
 import getTranslation from '../scripts/getTranslation';
-import { CHAR_LIMIT_TEXT_ENGLISH, CHAR_LIMIT_TEXT_FRENCH } from './utils-test';
-import { HELLO_IN_ENGLISH, HELLO_IN_FRENCH, HELLO_IN_SPANISH } from '../constants';
+import {
+  HELLO_IN_ENGLISH,
+  HELLO_IN_FRENCH,
+  HELLO_IN_SPANISH,
+  CHAR_LIMIT_TEXT_ENGLISH,
+  CHAR_LIMIT_TEXT_FRENCH,
+  CHAR_LIMIT_REPTD_ENGLISH,
+  CHAR_LIMIT_REPTD_FRENCH,
+} from './constants-test';
 
-describe('Gets translation correctly when language to and from specified correctly', () => {
+describe('getTranslation correctly when language to and from specified correctly', () => {
   it('Should return the correct translated text when `to` and `from` are supported language', async () => {
     const result = await getTranslation(HELLO_IN_FRENCH, 'fr', 'en');
     expect(result).toBe(HELLO_IN_ENGLISH);
@@ -14,7 +21,7 @@ describe('Gets translation correctly when language to and from specified correct
   });
 });
 
-describe('Translate if language to and/or from NOT specified', () => {
+describe('getTranslation if language to and/or from NOT specified', () => {
   it('should use "en" for languageFrom if not specified', async () => {
     const result = await getTranslation(HELLO_IN_ENGLISH, undefined, 'es');
     expect(result).toBe(HELLO_IN_SPANISH);
@@ -30,12 +37,14 @@ describe('Translate if language to and/or from NOT specified', () => {
   });
 });
 
-describe('No Character limit required check', () => {
+describe('getTranslation without character limit & repetition gives same result', () => {
   it('should correctly translate text > 5000 characters', async () => {
-    const result = await getTranslation(CHAR_LIMIT_TEXT_ENGLISH.repeat(10), 'en', 'fr');
+    const result = await getTranslation(CHAR_LIMIT_TEXT_ENGLISH, 'en', 'fr');
+    expect(result).toBe(CHAR_LIMIT_TEXT_FRENCH);
+  });
 
-    //  uses `toContain` instead of `toBe`
-    //  because google translate API tends to use synonyms when paragraphs repeat
-    expect(result).toContain(CHAR_LIMIT_TEXT_FRENCH);
+  it('should send correct translation (the same) when substrings are repeated', async () => {
+    const result = await getTranslation(CHAR_LIMIT_REPTD_ENGLISH, 'en', 'fr');
+    expect(result).toBe(CHAR_LIMIT_REPTD_FRENCH);
   });
 });

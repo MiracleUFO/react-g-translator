@@ -1,12 +1,15 @@
 import { Translate } from '../index';
+import { render, waitFor } from './utils-test';
 import {
+  HELLO_IN_ENGLISH,
+  HELLO_IN_FRENCH,
+  HELLO_IN_SPANISH,
+  NORMALIZER_OPTS,
   CHAR_LIMIT_TEXT_ENGLISH,
   CHAR_LIMIT_TEXT_FRENCH,
-  render,
-  waitFor,
-  getDefaultNormalizer,
-} from './utils-test';
-import { HELLO_IN_ENGLISH, HELLO_IN_FRENCH, HELLO_IN_SPANISH } from '../constants';
+  CHAR_LIMIT_REPTD_ENGLISH,
+  CHAR_LIMIT_REPTD_FRENCH,
+} from './constants-test';
 import language from '../types/language';
 
 // eslint-disable-next-line max-len
@@ -55,19 +58,18 @@ describe('Translate if language to and/or from NOT specified', () => {
   });
 });
 
-describe('No Character limit required check', () => {
+describe('Translate with no character limit works & repetition gives same result', () => {
   it('should correctly translate text > 5000 characters', async () => {
-    const { getByText } = await renderTranslate('en', 'fr', true, CHAR_LIMIT_TEXT_ENGLISH.repeat(10));
+    const { getByText } = await renderTranslate('en', 'fr', true, CHAR_LIMIT_TEXT_ENGLISH);
 
-    //  options to pass for both substrings & exact matches (which suffices)
-    const normalizerOpts = {
-      exact: false,
-      normalizer: getDefaultNormalizer({ trim: false, collapseWhitespace: false }),
-    };
+    await waitFor(() => getByText(CHAR_LIMIT_TEXT_FRENCH, NORMALIZER_OPTS));
+    expect(getByText(CHAR_LIMIT_TEXT_FRENCH, NORMALIZER_OPTS)).toBeInTheDocument();
+  });
 
-    //  does not check for repeating text exactly
-    //  because google translate API tends to use synonyms when paragraphs repeat
-    await waitFor(() => getByText(CHAR_LIMIT_TEXT_FRENCH, normalizerOpts));
-    expect(getByText(CHAR_LIMIT_TEXT_FRENCH, normalizerOpts)).toBeInTheDocument();
+  it('should send correct translation (the same) when substrings are repeated', async () => {
+    const { getByText } = await renderTranslate('en', 'fr', true, CHAR_LIMIT_REPTD_ENGLISH);
+
+    await waitFor(() => getByText(CHAR_LIMIT_REPTD_FRENCH, NORMALIZER_OPTS));
+    expect(getByText(CHAR_LIMIT_REPTD_FRENCH, NORMALIZER_OPTS)).toBeInTheDocument();
   });
 });

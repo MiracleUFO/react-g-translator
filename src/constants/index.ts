@@ -1,9 +1,5 @@
 import language from '../types/language';
 
-const HELLO_IN_ENGLISH = 'Hello World';
-const HELLO_IN_SPANISH = 'Hola Mundo';
-const HELLO_IN_FRENCH = 'Bonjour Monde';
-
 const DEFAULT_PROPS = {
   from: 'en',
   to: 'auto',
@@ -26,9 +22,6 @@ const DEFAULT_BROWSER_LANGUAGE : language = window?.navigator?.language.startsWi
 const TRANSLATION_NOT_FOUND_MESSAGE = 'react-g-translator: Err 404: No translation found. Check `to` & `from` props.';
 
 export {
-  HELLO_IN_ENGLISH,
-  HELLO_IN_FRENCH,
-  HELLO_IN_SPANISH,
   DEFAULT_PROPS,
   DEFAULT_QUERY_OPTIONS,
   DEFAULT_LANGUAGE_FROM,

@@ -116,3 +116,6 @@ See [Usage](#to-get-translation-of-text-directly)
 - [`from`](#props) and [`to`](#props) being the same will return original text (determined by google translation API.)
 - [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser langauge setting* respectively.
 - `text` is not in `from` language and google translate API cannot detect language automatically will return the original text. 
+
+## DEVELOPER TESTING
+- Some tests in `src/tests` may fail because google translate API sometimes returns synonyms when a string is translated multiple times.

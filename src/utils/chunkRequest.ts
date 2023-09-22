@@ -4,17 +4,26 @@ const chunkRequest = async (
   chunkSize: number = 0,
 ) => {
   const promises = [];
+  const chunks = [];
 
-  for (let i = 0; i < text.length; i += chunkSize) {
-    //  issue: need better way to handle arrays with text items > 5000 chars
-    //  below just takes arrays with more than 5000 items and slices it.
-    //  nested approach required?
-    const chunk = text.slice(i, i + chunkSize);
+  for (let i = 0; i < text.length;) {
+    const endIndex = i + chunkSize;
+
+    //  slices at last full sentences (within chunkSize)
+    //  to aid better translation
+    const endIndexFullSentence = (Math.min(endIndex, text.lastIndexOf('.', endIndex - 1) + 1) || endIndex);
+    const chunk = (text.slice(i, endIndexFullSentence));
+    chunks.push(chunk);
     promises.push(translationReqFunc(chunk));
+
+    //  afterthough: next index is the last translated full sentence endIndex
+    i += endIndexFullSentence;
   }
 
+  Promise.all(promises);
+
   const translatedChunks = await Promise.all(promises);
-  return translatedChunks.join('');
+  return translatedChunks.join(' ');
 };
 
 export default chunkRequest;
