@@ -4,7 +4,6 @@ const chunkRequest = async (
   chunkSize: number = 0,
 ) => {
   const promises = [];
-  const chunks = [];
 
   for (let i = 0; i < text.length;) {
     const endIndex = i + chunkSize;
@@ -13,7 +12,6 @@ const chunkRequest = async (
     //  to aid better translation
     const endIndexFullSentence = (Math.min(endIndex, text.lastIndexOf('.', endIndex - 1) + 1) || endIndex);
     const chunk = (text.slice(i, endIndexFullSentence));
-    chunks.push(chunk);
     promises.push(translationReqFunc(chunk));
 
     //  afterthough: next index is the last translated full sentence endIndex

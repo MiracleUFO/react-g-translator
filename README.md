@@ -111,11 +111,14 @@ See [Usage](#to-get-translation-of-text-directly)
 - [`to`](#props)  *optional*
 
 
-## SPECIAL CASES
+## Special Cases
 
 - [`from`](#props) and [`to`](#props) being the same will return original text (determined by google translation API.)
 - [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser langauge setting* respectively.
 - `text` is not in `from` language and google translate API cannot detect language automatically will return the original text. 
 
-## DEVELOPER TESTING
-- Some tests in `src/tests` may fail because google translate API sometimes returns synonyms when a string is translated multiple times.
+## Developer Testing
+- [Install node-modules](#install)
+- `npm run test` or `yarn run test`
+- Some tests in `src/tests` may fail because google translate API might return synonyms when a string is translated multiple times.
+- If `TooManyRequestsError` or Error Code `429` is encountered, update `env` variable `TRANSLATE_API_PROXY` with a correct [proxy](https://free-proxy-list.net/) (with yes in Google column.) This error is due to Google Translate APIs rate limiting per IP address (this limit seems variable, see [discussion](https://github.com/vitalets/google-translate-api/issues/107#issuecomment-1302220214))
