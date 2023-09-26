@@ -1,5 +1,6 @@
 import getTranslation from '../scripts/getTranslation';
 import {
+  JEST_TIMEOUT,
   HELLO_IN_ENGLISH,
   HELLO_IN_FRENCH,
   HELLO_IN_SPANISH,
@@ -8,6 +9,8 @@ import {
   CHAR_LIMIT_REPTD_ENGLISH,
   CHAR_LIMIT_REPTD_FRENCH,
 } from './constants-test';
+
+jest.setTimeout(JEST_TIMEOUT);
 
 describe('getTranslation correctly when language to and from specified correctly', () => {
   it('Should return the correct translated text when `to` and `from` are supported language', async () => {

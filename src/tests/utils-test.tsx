@@ -2,7 +2,7 @@ import { ReactElement, ReactNode } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { LanguageProvider } from '../context/languageContext';
-import { DEFAULT_QUERY_OPTIONS } from '../constants';
+import { DEFAULT_QUERY_OPTIONS } from './constants-test';
 
 const queryClient = new QueryClient(DEFAULT_QUERY_OPTIONS);
 queryClient.clear();

@@ -1,5 +1,14 @@
 import { getDefaultNormalizer } from './utils-test';
 
+const JEST_TIMEOUT = 20000;
+const DEFAULT_QUERY_OPTIONS = {
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+};
+
 const HELLO_IN_ENGLISH = 'Hello World';
 const HELLO_IN_SPANISH = 'Hola Mundo';
 const HELLO_IN_FRENCH = 'Bonjour Monde';
@@ -19,6 +28,8 @@ const CHAR_LIMIT_REPTD_ENGLISH = ('Be kind to everyone, regardless of their race
 const CHAR_LIMIT_REPTD_FRENCH = ('Soyez gentil avec tout le monde, quels que soient leur race, leur religion, leur sexe ou leur orientation sexuelle. Aidez ceux qui en ont besoin, que ce soit en donnant de notre temps, en faisant un don à une œuvre caritative ou simplement en donnant un coup de main. Protégez notre planète en réduisant notre consommation de ressources, en recyclant et en utilisant des sources d\'énergie renouvelables. Instruisons-nous sur le monde qui nous entoure et les défis auxquels nous sommes confrontés. Impliquez-vous dans nos communautés et faites entendre nos voix. Votez pour des candidats qui partagent nos valeurs et qui travailleront à rendre le monde meilleur. ').repeat(10).trim();
 
 export {
+  JEST_TIMEOUT,
+  DEFAULT_QUERY_OPTIONS,
   HELLO_IN_ENGLISH,
   HELLO_IN_FRENCH,
   HELLO_IN_SPANISH,

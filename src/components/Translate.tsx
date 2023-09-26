@@ -4,10 +4,10 @@ import { LanguageProvider } from '../context/languageContext';
 import useTranslation from '../queries/useTranslation';
 
 import determineRenderedText from '../utils/determineRenderedText';
-import { DEFAULT_PROPS } from '../constants';
+import { DEFAULT_PROPS, DEFAULT_QUERY_OPTIONS } from '../constants';
 import language from '../types/language';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient(DEFAULT_QUERY_OPTIONS);
 
 const Translate = ({
   children,

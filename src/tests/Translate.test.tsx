@@ -1,6 +1,7 @@
 import { Translate } from '../index';
-import { render, waitFor } from './utils-test';
+import { render, waitFor, cleanup } from './utils-test';
 import {
+  JEST_TIMEOUT,
   HELLO_IN_ENGLISH,
   HELLO_IN_FRENCH,
   HELLO_IN_SPANISH,
@@ -11,6 +12,11 @@ import {
   CHAR_LIMIT_REPTD_FRENCH,
 } from './constants-test';
 import language from '../types/language';
+
+jest.setTimeout(JEST_TIMEOUT);
+afterEach(() => {
+  cleanup();
+});
 
 // eslint-disable-next-line max-len
 const renderTranslate = async (from?: language, to?: language, shouldFallback?: boolean, text?: string) => render(
