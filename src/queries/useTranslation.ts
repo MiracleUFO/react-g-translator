@@ -1,4 +1,6 @@
 import { useQuery } from 'react-query';
+import sha256 from 'crypto-js/sha256';
+
 import { useLanguageContext } from '../context/languageContext';
 
 import getTranslation from '../utils/getTranslation';
@@ -17,7 +19,7 @@ const useTranslation = (
     isError,
     isLoading,
   } = useQuery<string | undefined>(
-    'translation',
+    sha256(`${text}-${from}-${to}`).toString(),
     () => getTranslation(text, from || languageFrom, to || languageTo),
     {
       //  more descriptive error than react-query error

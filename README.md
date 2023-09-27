@@ -110,6 +110,10 @@ See [Usage](#to-get-translation-of-text-directly)
 - [`from`](#props)  *optional*
 - [`to`](#props)  *optional*
 
+## Caching
+- For every UNIQUE `text`, `to`, and `from` [(props)](#props) combination the translation is fetched & cached for 24 hours (as long as QueryClient is not destroyed,) this is to prevent unnecessary requests.
+- QueryClient is destroyed in this case ONLY when the web page is reloaded.
+
 
 ## Special Cases
 
@@ -123,3 +127,15 @@ See [Usage](#to-get-translation-of-text-directly)
 - **Note**
   - Some tests in `src/tests` may fail because google translate API might return synonyms when a string is translated multiple times.
   - If `TooManyRequestsError` or Error Code `429` is encountered, use PROXY by updating `env` variable `TRANSLATE_API_PROXY` with a correct [proxy](https://free-proxy-list.net/) (with yes in Google column.) This error is due to Google Translate APIs rate limiting per IP address (this limit seems variable, see [discussion.](https://github.com/vitalets/google-translate-api/issues/107#issuecomment-1302220214)) Switching internet providers may also solve this (temporarily.)
+  - [**Caching**](#caching) is **OFF** by default in testing, to turn **ON**, replace `QUERY_DEFAULT_OPTIONS` in `tests/constants-test.ts` with:
+```js
+const ONE_DAY_IN_MS = 24 * (60 * 60 * 1000);
+const DEFAULT_QUERY_OPTIONS = {
+  defaultOptions: {
+    queries: {
+      staleTime: ONE_DAY_IN_MS,
+      cacheTime: ONE_DAY_IN_MS,
+    },
+  },
+};
+```

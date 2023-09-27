@@ -57,6 +57,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/crypto-js": "^4.1.2",
     "@types/google-translate-api": "^2.3.2",
     "@types/jest": "^29.5.4",
     "@types/lodash": "^4.14.199",
@@ -98,6 +99,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.0",
     "@vitalets/google-translate-api": "^9.0.0",
+    "crypto-js": "^4.1.1",
     "env-cmd": "^10.1.0",
     "https-proxy-agent": "^7.0.2",
     "lodash": "^4.17.21",

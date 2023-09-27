@@ -15,11 +15,13 @@ const DEFAULT_PROPS = {
   shouldFallback: true,
 };
 
+const ONE_DAY_IN_MS = 24 * (60 * 60 * 1000);
+
 const DEFAULT_QUERY_OPTIONS = {
   defaultOptions: {
     queries: {
-      //  will default to last successful cache up to 1 day
-      staleTime: 24 * (60 * 60 * 1000),
+      staleTime: ONE_DAY_IN_MS,
+      cacheTime: ONE_DAY_IN_MS,
     },
   },
 };
