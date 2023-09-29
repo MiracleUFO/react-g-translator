@@ -67,7 +67,7 @@ return (
 
   - `to`: Language to translate to. Optional.
     - Defaults to *user's current browser language setting*.
-    - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser langauge setting*.
+    - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser language setting*.
     - Overriden by [`setLanguageTo`](#hook-setlanguageto) hook. (Coming in V2)
 
  - `shouldFallback`: Determines error handling. In <Wrapper /> displays original text when true, or empty string otherwise (when error). Optional.
@@ -118,8 +118,8 @@ See [Usage](#to-get-translation-of-text-directly)
 ## Special Cases
 
 - [`from`](#props) and [`to`](#props) being the same will return original text (determined by google translation API.)
-- [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser langauge setting* respectively.
-- `text` is not in `from` language and google translate API cannot detect language automatically will return the original text. 
+- [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser language setting* respectively.
+- `text` is not in the [`from`](#props) language and google translate API cannot detect language automatically, it will return the original text. 
 
 ## Developer Testing
 - [Install node-modules](#install)
