@@ -22,7 +22,7 @@ or with yarn
 
 ### To translate whole component:
 ```jsx
-import Translator from 'react-g-translate';
+import Translator from 'react-g-translator';
 
 return (
   <Translator from='en' to='es'>
@@ -33,7 +33,7 @@ return (
 
 ### To translate specific text inline:
 ```jsx
-import { Translate } from 'react-g-translate';
+import { Translate } from 'react-g-translator';
 
 return (
   <div>
@@ -47,7 +47,7 @@ return (
 
 ### To get translation of text directly:
 ```jsx
-import { getTranslation } from 'react-g-translate';
+import { getTranslation } from 'react-g-translator';
 
 const helloInIgbo = await getTranslation('Hello', 'en', 'ig');
 
