@@ -13,13 +13,18 @@ import {
 jest.setTimeout(JEST_TIMEOUT);
 
 describe('getTranslation correctly when language to and from specified correctly', () => {
-  it('Should return the correct translated text when `to` and `from` are supported language', async () => {
+  it('should return the correct translated text when `to` and `from` are supported language', async () => {
     const result = await getTranslation(HELLO_IN_FRENCH, 'fr', 'en');
     expect(result).toBe(HELLO_IN_ENGLISH);
   });
 
   it('should fallback to the default text if the translation is not found', async () => {
     const result = await getTranslation(HELLO_IN_ENGLISH, 'am', 'am');
+    expect(result).toBe(HELLO_IN_ENGLISH);
+  });
+
+  it('should return original text if `to` and `from` are the same', async () => {
+    const result = await getTranslation(HELLO_IN_ENGLISH, 'en', 'en');
     expect(result).toBe(HELLO_IN_ENGLISH);
   });
 });

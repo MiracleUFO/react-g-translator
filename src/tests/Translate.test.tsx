@@ -43,6 +43,13 @@ describe('Translate when language to and from specified', () => {
     await waitFor(() => getByText(HELLO_IN_ENGLISH));
     expect(getByText(HELLO_IN_ENGLISH)).toBeInTheDocument();
   });
+
+  it('should return original text if `to` and `from` are the same', async () => {
+    const { getByText } = await renderTranslate('en', 'en');
+
+    await waitFor(() => getByText(HELLO_IN_ENGLISH));
+    expect(getByText(HELLO_IN_ENGLISH)).toBeInTheDocument();
+  });
 });
 
 describe('Translate if language to and/or from NOT specified', () => {
