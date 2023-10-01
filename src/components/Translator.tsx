@@ -1,8 +1,9 @@
 import {
   ReactNode,
+  ReactElement,
   Children,
-  useState,
-  useCallback,
+  cloneElement,
+  isValidElement,
 } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -10,52 +11,82 @@ import { LanguageProvider } from '../context/languageContext';
 import useTranslation from '../queries/useTranslation';
 import determineRenderedText from '../utils/determineRenderedText';
 
-import language from '../types/language';
 import { DEFAULT_PROPS, DEFAULT_QUERY_OPTIONS } from '../constants';
+import language from '../types/language';
 
 const queryClient = new QueryClient(DEFAULT_QUERY_OPTIONS);
 
-const Translator: { defaultProps: { from: string; to: string; shouldFallback: boolean; }} = ({
+const Translation = ({
+  text,
+  from,
+  to,
+  shouldFallback,
+}: {
+  text: string;
+  from?: language;
+  to?: language;
+  shouldFallback?: boolean;
+}) => {
+  const { data, isError, isLoading } = useTranslation(text, from, to);
+  const translatedText = determineRenderedText(
+    text,
+    data,
+    shouldFallback,
+    isError,
+    isLoading,
+  );
+  return translatedText;
+};
+
+const recursivelyTranslate = (
+  node: ReactNode,
+  from?: language,
+  to?: language,
+  shouldFallback?: boolean,
+): ReactNode => {
+  if (typeof node === 'string') {
+    return (
+      <Translation
+        text={node}
+        from={from}
+        to={to}
+        shouldFallback={shouldFallback}
+      />
+    );
+  }
+
+  if (isValidElement(node)) {
+    return cloneElement(node as ReactElement, {
+      children: (
+        recursivelyTranslate(Children.toArray(node.props.children), from, to, shouldFallback)
+      ),
+    });
+  }
+
+  if (Children.count(node) === 0) {
+    return node;
+  }
+
+  return Children.map(node, (child) => recursivelyTranslate(child, from, to, shouldFallback));
+};
+
+const Translator = ({
   children,
   from,
   to,
   shouldFallback,
-} : {
-  children: string,
-  from?: language,
-  to?: language,
-  shouldFallback?: boolean,
-}) => {
-  const [textToTranslate, setTextToTranslate] = useState('');
-
-  const {
-    data,
-    isError,
-    isLoading,
-  } = useTranslation(textToTranslate, from, to);
-
-  const recursivelyTranslate = useCallback((node: ReactNode): ReactNode => {
-    if (typeof node === 'string') {
-      setTextToTranslate(node);
-      const renderedText = determineRenderedText(node, data, shouldFallback, isError, isLoading);
-      return renderedText;
-    }
-
-    if (Children.count(node) === 0) {
-      return node;
-    }
-
-    return Children.map(node, (child) => recursivelyTranslate(child));
-  }, [data, isError, isLoading]);
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        {recursivelyTranslate(children)}
-      </LanguageProvider>
-    </QueryClientProvider>
-  );
-};
+}: {
+  children: ReactNode;
+  from?: language;
+  to?: language;
+  shouldFallback?: boolean;
+}) => (
+  <QueryClientProvider client={queryClient}>
+    <LanguageProvider>
+      {recursivelyTranslate(children, from, to, shouldFallback)}
+    </LanguageProvider>
+  </QueryClientProvider>
+);
 
 Translator.defaultProps = DEFAULT_PROPS;
 

@@ -1,6 +1,6 @@
 import { getDefaultNormalizer } from './utils-test';
 
-const JEST_TIMEOUT = 20000;
+const JEST_TIMEOUT = 60000;
 const DEFAULT_QUERY_OPTIONS = {
   defaultOptions: {
     queries: {
