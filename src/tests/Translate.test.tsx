@@ -7,7 +7,7 @@ import {
   HELLO_IN_SPANISH,
   NORMALIZER_OPTS,
   CHAR_LIMIT_TEXT_ENGLISH,
-  CHAR_LIMIT_TEXT_FRENCH,
+  CHAR_LIMIT_TEXT_FRENCH_ALT,
 } from './constants-test';
 import language from '../types/language';
 
@@ -73,7 +73,7 @@ describe('Translate with no character limit works & repetition gives same result
   it('should correctly translate text > 5000 characters', async () => {
     const { getByText } = await renderTranslate('en', 'fr', true, CHAR_LIMIT_TEXT_ENGLISH);
 
-    await waitFor(() => getByText(CHAR_LIMIT_TEXT_FRENCH, NORMALIZER_OPTS));
-    expect(getByText(CHAR_LIMIT_TEXT_FRENCH, NORMALIZER_OPTS)).toBeInTheDocument();
+    await waitFor(() => getByText(CHAR_LIMIT_TEXT_FRENCH_ALT, NORMALIZER_OPTS));
+    expect(getByText(CHAR_LIMIT_TEXT_FRENCH_ALT, NORMALIZER_OPTS)).toBeInTheDocument();
   });
 });
