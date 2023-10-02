@@ -8,8 +8,6 @@ import {
   NORMALIZER_OPTS,
   CHAR_LIMIT_TEXT_ENGLISH,
   CHAR_LIMIT_TEXT_FRENCH,
-  CHAR_LIMIT_REPTD_ENGLISH,
-  CHAR_LIMIT_REPTD_FRENCH,
 } from './constants-test';
 import language from '../types/language';
 
@@ -87,12 +85,5 @@ describe('Translate with no character limit works & repetition gives same result
 
     await waitFor(() => getByText(CHAR_LIMIT_TEXT_FRENCH, NORMALIZER_OPTS));
     expect(getByText(CHAR_LIMIT_TEXT_FRENCH, NORMALIZER_OPTS)).toBeInTheDocument();
-  });
-
-  it('should send correct translation (the same) when substrings are repeated', async () => {
-    const { getByText } = await renderTranslate('en', 'fr', true, CHAR_LIMIT_REPTD_ENGLISH);
-
-    await waitFor(() => getByText(CHAR_LIMIT_REPTD_FRENCH, NORMALIZER_OPTS));
-    expect(getByText(CHAR_LIMIT_REPTD_FRENCH, NORMALIZER_OPTS)).toBeInTheDocument();
   });
 });

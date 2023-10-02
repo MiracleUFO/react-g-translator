@@ -5,29 +5,30 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./build/esm/types/index.d.ts",
-        "default": "./build/esm/index.mjs"
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
       },
       "require": {
-        "types": "./build/cjs/types/index.d.ts",
-        "default": "./build/cjs/index.js"
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
       }
     }
   },
-  "types": "./build/cjs/types/index.d.ts",
-  "main": "./build/cjs/index.js",
+  "types": "./lib/cjs/types/index.d.ts",
+  "main": "./lib/cjs/index.js",
   "files": [
-    "build/**/*"
+    "lib/**/*"
   ],
   "scripts": {
-    "clean": "rm -rf ./build",
+    "clean": "rm -rf ./lib",
     "build": "npm run clean && npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv build/esm/index.js build/esm/index.mjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
     "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
     "semantic-release": "semantic-release",
     "test": "env-cmd -f .env.development react-scripts test --runInBand --no-cache",
     "prepack": "npm run build",
-    "lint": "eslint src --ext .js,.jsx,.tsx,.ts --fix"
+    "lint": "eslint src --ext .js,.jsx,.tsx,.ts --fix",
+    "prepublish": "npm run build"
   },
   "release": {
     "branches": [

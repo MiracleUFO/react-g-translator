@@ -1,4 +1,4 @@
-import {
+import React, {
   ReactNode,
   ReactElement,
   Children,
@@ -35,8 +35,11 @@ const Translation = ({
     isError,
     isLoading,
   );
-  return translatedText;
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{translatedText}</>;
 };
+
+Translation.defaultProps = DEFAULT_PROPS;
 
 const recursivelyTranslate = (
   node: ReactNode,

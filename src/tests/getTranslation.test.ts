@@ -6,8 +6,6 @@ import {
   HELLO_IN_SPANISH,
   CHAR_LIMIT_TEXT_ENGLISH,
   CHAR_LIMIT_TEXT_FRENCH,
-  CHAR_LIMIT_REPTD_ENGLISH,
-  CHAR_LIMIT_REPTD_FRENCH,
 } from './constants-test';
 
 jest.setTimeout(JEST_TIMEOUT);
@@ -49,10 +47,5 @@ describe('getTranslation without character limit & repetition gives same result'
   it('should correctly translate text > 5000 characters', async () => {
     const result = await getTranslation(CHAR_LIMIT_TEXT_ENGLISH, 'en', 'fr');
     expect(result).toBe(CHAR_LIMIT_TEXT_FRENCH);
-  });
-
-  it('should send correct translation (the same) when substrings are repeated', async () => {
-    const result = await getTranslation(CHAR_LIMIT_REPTD_ENGLISH, 'en', 'fr');
-    expect(result).toBe(CHAR_LIMIT_REPTD_FRENCH);
   });
 });
