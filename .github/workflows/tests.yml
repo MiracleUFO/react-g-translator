@@ -1,10 +1,6 @@
 name: Tests
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -13,19 +9,15 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x, 18.x]
+        node-version: [ 16.x, 18.x]
 
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-      - name: Install mocha
-        run: npm install -g mocha
       - name: Install dependencies
         run: npm install 
-      - name: "Run Test"
-        run: mocha tests/translate-component.spec.tsx
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: "Run Tests"
+        run: npm run test
       - run: npm ci
       - run: npm test

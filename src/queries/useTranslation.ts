@@ -1,26 +1,16 @@
 import { useQuery } from 'react-query';
-import { translate } from '@vitalets/google-translate-api';
-import language from '../types/language';
+import sha256 from 'crypto-js/sha256';
+
 import { useLanguageContext } from '../context/languageContext';
 
-export const getTranslation = async (
-  text: string,
-  to?: language,
-  from?: language,
-) : Promise<string> => {
-  try {
-    const translation = await translate(text, { from, to });
-    return translation.text;
-  } catch (error) {
-    console.error(error);
-    return String(error);
-  }
-};
+import getTranslation from '../utils/getTranslation';
+import getErrorInTranslationMessage from '../utils/getErrorInTranslationMessage';
+import language from '../types/language';
 
 const useTranslation = (
   text: string,
-  to?: language,
   from?: language,
+  to?: language,
 ) => {
   const { languageFrom, languageTo } = useLanguageContext();
   const {
@@ -28,7 +18,17 @@ const useTranslation = (
     error,
     isError,
     isLoading,
-  } = useQuery<string>('translation', () => getTranslation(text, to || languageTo, from || languageFrom));
+  } = useQuery<string | undefined>(
+    sha256(`${text}-${from}-${to}`).toString(),
+    () => getTranslation(text, from || languageFrom, to || languageTo),
+    {
+      //  more descriptive error than react-query error
+      onError: (err: unknown) => {
+        console.error(getErrorInTranslationMessage(err));
+      },
+    },
+  );
+
   return {
     data,
     error,

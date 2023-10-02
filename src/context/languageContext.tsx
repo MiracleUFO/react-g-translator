@@ -5,17 +5,13 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
+import { DEFAULT_BROWSER_LANGUAGE, DEFAULT_LANGUAGE_FROM } from '../constants';
 import language from '../types/language';
 
-const defaultBrowserLanguage : language = window?.navigator?.language.startsWith('zh')
-  ? window?.navigator?.language as language
-  : window?.navigator?.language.split('-')[0] as language;
 const LanguageContext = createContext({
-  languageFrom: 'en' as language | undefined,
-  languageTo: defaultBrowserLanguage as language | undefined,
-  // eslint-disable-next-line no-unused-vars
+  languageFrom: DEFAULT_LANGUAGE_FROM,
+  languageTo: DEFAULT_BROWSER_LANGUAGE,
   setLanguageFrom: (_from: language) => {},
-  // eslint-disable-next-line no-unused-vars
   setLanguageTo: (_to: language) => {},
   resetLanguages: () => {},
   resetFrom: () => {},
@@ -23,20 +19,20 @@ const LanguageContext = createContext({
 });
 
 export const LanguageProvider = ({ children }: { children: ReactNode}) => {
-  const [languageFrom, setLanguageFrom] = useState<language>();
-  const [languageTo, setLanguageTo] = useState<language>();
+  const [languageFrom, setLanguageFrom] = useState<language>(DEFAULT_LANGUAGE_FROM);
+  const [languageTo, setLanguageTo] = useState<language>(DEFAULT_BROWSER_LANGUAGE);
 
   const resetLanguages = () => {
-    setLanguageFrom('en');
-    setLanguageTo(defaultBrowserLanguage);
+    setLanguageFrom(DEFAULT_LANGUAGE_FROM);
+    setLanguageTo(DEFAULT_BROWSER_LANGUAGE);
   };
 
   const resetFrom = () => {
-    setLanguageFrom('en');
+    setLanguageFrom(DEFAULT_LANGUAGE_FROM);
   };
 
   const resetTo = () => {
-    setLanguageTo(defaultBrowserLanguage);
+    setLanguageTo(DEFAULT_BROWSER_LANGUAGE);
   };
 
   const value = useMemo(() => (

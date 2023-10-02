@@ -1,24 +1,36 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import language from '../types/language';
-import { DEFAULT_PROPS } from '../constants';
-
 import { LanguageProvider } from '../context/languageContext';
 import useTranslation from '../queries/useTranslation';
 
-const queryClient = new QueryClient();
+import determineRenderedText from '../utils/determineRenderedText';
+import { DEFAULT_PROPS, DEFAULT_QUERY_OPTIONS } from '../constants';
+import language from '../types/language';
 
-const Translate = ({ children, to, from } : {
+const queryClient = new QueryClient(DEFAULT_QUERY_OPTIONS);
+
+const Translate = ({
+  children,
+  to,
+  from,
+  shouldFallback,
+} : {
   children: string,
   from?: language,
   to?: language,
+  shouldFallback?: boolean,
 }) => {
-  const { data } = useTranslation(children, to, from);
+  const {
+    data,
+    isError,
+    isLoading,
+  } = useTranslation(children, from, to);
+
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
-        {data}
+        {determineRenderedText(children, data, shouldFallback, isError, isLoading)}
       </LanguageProvider>
     </QueryClientProvider>
   );

@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   settings: {
     'import/resolver': {
@@ -40,6 +41,8 @@ module.exports = {
       js: 'never',
       jsx: 'never',
     }],
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
     'react/jsx-filename-extension': 'off',
     'react/function-component-definition': [
       'error',
@@ -48,5 +51,6 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
 };
