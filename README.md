@@ -70,7 +70,7 @@ return (
     - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser language setting*.
     - Overriden by [`setLanguageTo`](#hook-setlanguageto) hook. (Coming in V2)
 
- - `shouldFallback`: Determines error handling. In <Wrapper /> displays original text when true, or empty string otherwise (when error). Optional.
+ - `shouldFallback`: Determines error handling. Available in `<Translate />` and `<Translator />`, when error, displays original text when `shouldFallback` is true, or empty string otherwise. Optional.
     - Defaults to `true`.
     - *Type boolean*. If not provided will default to true.
     - **NOTE:** Will always log exception when there is an error in translation.
