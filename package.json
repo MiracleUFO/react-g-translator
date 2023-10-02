@@ -91,7 +91,8 @@
   ],
   "overrides": {
     "react-scripts": {
-      "@svgr/webpack": "6.5.1"
+      "@svgr/webpack": "6.5.1",
+      "postcss": "8.4.31"
     }
   },
   "dependencies": {
