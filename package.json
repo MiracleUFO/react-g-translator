@@ -25,7 +25,7 @@
     "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv build/esm/index.js build/esm/index.mjs",
     "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
     "semantic-release": "semantic-release",
-    "test": "env-cmd -f .env.local react-scripts test --runInBand --no-cache",
+    "test": "env-cmd -f .env.development react-scripts test --runInBand --no-cache",
     "prepack": "npm run build",
     "lint": "eslint src --ext .js,.jsx,.tsx,.ts --fix"
   },
