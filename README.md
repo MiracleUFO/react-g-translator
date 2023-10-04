@@ -3,7 +3,8 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 
 ## Features
 - Covers multiple use cases (see [Usage](#usage))
- - Allows to create custom language change component
+- Enables Web Internationalisation (i18n) and Accessibility (a11y)
+- Allows to create custom language change component
 - Auto language detection
 - Spelling and Language correction
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
