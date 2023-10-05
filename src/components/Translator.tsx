@@ -1,4 +1,6 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, {
+  JSX,
   ReactNode,
   ReactElement,
   Children,
@@ -35,7 +37,6 @@ const Translation = ({
     isError,
     isLoading,
   );
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{translatedText}</>;
 };
 
@@ -79,14 +80,14 @@ const Translator = ({
   to,
   shouldFallback,
 }: {
-  children: ReactNode;
+  children: ReactNode | React.ReactElement<any, any> | Element | JSX.Element;
   from?: language;
   to?: language;
   shouldFallback?: boolean;
 }) => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
-      {recursivelyTranslate(children, from, to, shouldFallback)}
+      {recursivelyTranslate(<>{children}</>, from, to, shouldFallback)}
     </LanguageProvider>
   </QueryClientProvider>
 );

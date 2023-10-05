@@ -2,7 +2,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
   },
   "include": [
     "*.eslintrc.js",
