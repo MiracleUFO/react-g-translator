@@ -19,7 +19,7 @@
     "semantic-release": "semantic-release",
     "test": "env-cmd -f .env.development react-scripts test --runInBand --no-cache",
     "prepack": "npm run build",
-    "lint": "eslint src --ext .js,.jsx,.tsx,.ts,.mjs --fix",
+    "lint": "eslint src --ext .js,.jsx,.tsx,.ts --fix",
     "prepublish": "npm run build"
   },
   "release": {
@@ -86,6 +86,8 @@
     "rimraf": "^5.0.5",
     "rollup": "^3.29.4",
     "rollup-plugin-dts": "^6.0.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-polyfill-node": "^0.12.0",
     "semantic-release": "^21.1.1",
     "ts-node": "^10.9.1"
   },
@@ -109,10 +111,14 @@
     "env-cmd": "^10.1.0",
     "https-proxy-agent": "^7.0.2",
     "lodash": "^4.17.21",
-    "react": "^18.2.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^18.2.0"
   }
 }
