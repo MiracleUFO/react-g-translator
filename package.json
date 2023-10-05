@@ -2,32 +2,24 @@
   "name": "@miracleufo/react-g-translator",
   "version": "1.0.0",
   "description": "A modern, free, lightweight npm package for translating react apps (component wrapper.) No API keys or language list files are required.",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./lib/esm/types/index.d.ts",
-        "default": "./lib/esm/index.mjs"
-      },
-      "require": {
-        "types": "./lib/cjs/types/index.d.ts",
-        "default": "./lib/cjs/index.js"
-      }
-    }
-  },
-  "types": "./lib/cjs/types/index.d.ts",
-  "main": "./lib/cjs/index.js",
+  "author": "Miracle Ufodiama",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/index.min.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib/**/*"
+    "dist",
+    "src",
+    "tsconfig.json"
   ],
   "scripts": {
-    "clean": "rm -rf ./lib",
-    "build": "npm run clean && npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
-    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+    "clean": "rimraf dist",
+    "build": "npm run clean && rollup -c",
     "semantic-release": "semantic-release",
     "test": "env-cmd -f .env.development react-scripts test --runInBand --no-cache",
     "prepack": "npm run build",
-    "lint": "eslint src --ext .js,.jsx,.tsx,.ts --fix",
+    "lint": "eslint src --ext .js,.jsx,.tsx,.ts,.mjs --fix",
     "prepublish": "npm run build"
   },
   "release": {
@@ -47,17 +39,25 @@
     "typescript",
     "esm",
     "cjs",
+    "umd",
+    "react",
     "nodejs",
     "commonjs",
     "ecmascript",
     "beginner",
-    "example",
-    "demonstration"
+    "demonstration",
+    "localisation",
+    "accessibility",
+    "a11y",
+    "internationalisation",
+    "i18n"
   ],
-  "author": "Miracle Ufodiama",
-  "license": "MIT",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@rollup/plugin-commonjs": "^25.0.5",
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
     "@types/crypto-js": "^4.1.2",
     "@types/google-translate-api": "^2.3.2",
     "@types/jest": "^29.5.4",
@@ -83,6 +83,9 @@
     "jsdom": "20.0.3",
     "jsdom-global": "3.0.2",
     "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "rollup": "^3.29.4",
+    "rollup-plugin-dts": "^6.0.2",
     "semantic-release": "^21.1.1",
     "ts-node": "^10.9.1"
   },
@@ -97,6 +100,7 @@
     }
   },
   "dependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.2",
     "@testing-library/jest-dom": "^6.1.3",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.0",
