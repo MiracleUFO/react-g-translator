@@ -31,7 +31,7 @@ const mainConfig = {
     {
       file: 'dist/index.min.js',
       format: 'umd',
-      name: 'DatePicker',
+      name: 'react-g-translator',
       plugins: [terser()],
       sourcemap: true,
       globals: {

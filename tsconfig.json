@@ -4,8 +4,17 @@
     "strict": true,
     "esModuleInterop": true,
     "target": "es5",
-    "module": "esnext",
+    "module": "es6",
     "moduleResolution": "node",
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "importHelpers": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "include": [
     "*.eslintrc.js",
