@@ -1,13 +1,15 @@
 import language from '../types/language';
 
-const { NODE_ENV, TRANSLATE_API_PROXY } = process.env;
+const { NODE_ENV, TEST_TRANSLATE_API_PROXY } = process.env;
 
 // NODE ENVIRONMENT
 const NODE_DEVELOPMENT = 'development';
 const NODE_TEST = 'test';
 const IS_DEVELOPMENT_OR_TEST = NODE_ENV && [NODE_DEVELOPMENT, NODE_TEST].includes(NODE_ENV);
 
-const PROXY = TRANSLATE_API_PROXY;
+const PROXY_URL = 'https://react-g-translator-proxy.vercel.app/api';
+const PROXY_URL_ALT = 'https://react-g-translator-proxy-express.onrender.com/translate';
+const PROXY_URL_TEST = TEST_TRANSLATE_API_PROXY;
 
 const DEFAULT_PROPS = {
   from: 'en',
@@ -41,7 +43,9 @@ export {
   NODE_DEVELOPMENT,
   NODE_TEST,
   IS_DEVELOPMENT_OR_TEST,
-  PROXY,
+  PROXY_URL,
+  PROXY_URL_ALT,
+  PROXY_URL_TEST,
   DEFAULT_PROPS,
   DEFAULT_QUERY_OPTIONS,
   DEFAULT_LANGUAGE_FROM,

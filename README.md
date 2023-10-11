@@ -13,17 +13,20 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 - Allows for custom language list files. (Coming in v2.0.0)
 
 ## Install
-```npm install react-g-translator```
+```npm install @miracleufo/react-g-translator```
 
 or with yarn
 
-```yarn add react-g-translator```
+```yarn add @miracleufo/react-g-translator```
 
 ## Usage
 
+> DISCLAIMER!
+To be 100% legal please use the official [Google Translate API](https://cloud.google.com/translate). This project is mainly for pet projects and prototyping 😉. Also, only use the most recent version of this package.
+
 ### To translate whole component:
 ```jsx
-import Translator from 'react-g-translator';
+import Translator from '@miracleufo/react-g-translator';
 
 return (
   <Translator from='en' to='es'>
@@ -34,7 +37,7 @@ return (
 
 ### To translate specific text inline:
 ```jsx
-import { Translate } from 'react-g-translator';
+import { Translate } from '@miracleufo/react-g-translator';
 
 return (
   <div>
@@ -48,7 +51,7 @@ return (
 
 ### To get translation of text directly:
 ```jsx
-import { getTranslation } from 'react-g-translator';
+import { getTranslation } from '@miracleufo/react-g-translator';
 
 const helloInIgbo = await getTranslation('Hello', 'en', 'ig');
 

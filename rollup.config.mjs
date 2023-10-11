@@ -41,6 +41,7 @@ const mainConfig = {
   ],
   external: ['react', 'react-dom'],
   plugins: [
+    // @ts-ignore
     peerDepsExternal(),
     nodeResolve(),
     commonjs(),
