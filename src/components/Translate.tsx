@@ -23,9 +23,12 @@ const Translate = ({
 }) => {
   const {
     data,
+    error,
     isError,
     isLoading,
   } = useTranslation(children, from, to);
+
+  if (error) return children;
 
   return (
     <QueryClientProvider client={queryClient}>

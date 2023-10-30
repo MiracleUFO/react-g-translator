@@ -1,3 +1,4 @@
+import { QueryClientConfig, QueryCache } from 'react-query';
 import language from '../types/language';
 
 const { NODE_ENV, TEST_TRANSLATE_API_PROXY } = process.env;
@@ -7,8 +8,8 @@ const NODE_DEVELOPMENT = 'development';
 const NODE_TEST = 'test';
 const IS_DEVELOPMENT_OR_TEST = NODE_ENV && [NODE_DEVELOPMENT, NODE_TEST].includes(NODE_ENV);
 
-const PROXY_URL = 'https://react-g-translator-proxy.vercel.app/api';
-const PROXY_URL_ALT = 'https://react-g-translator-proxy-express.onrender.com/translate';
+const PROXY_URL = 'https://react-g-translator-proxy-express.onrender.com/translate';
+const PROXY_URL_ALT = 'https://react-g-translator-proxy.vercel.app/api';
 const PROXY_URL_TEST = TEST_TRANSLATE_API_PROXY;
 
 const DEFAULT_PROPS = {
@@ -19,7 +20,15 @@ const DEFAULT_PROPS = {
 
 const ONE_DAY_IN_MS = 24 * (60 * 60 * 1000);
 
-const DEFAULT_QUERY_OPTIONS = {
+const DEFAULT_QUERY_OPTIONS: QueryClientConfig = {
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      if (!query.state.data) {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
+    },
+  }),
   defaultOptions: {
     queries: {
       staleTime: ONE_DAY_IN_MS,
@@ -35,7 +44,7 @@ const DEFAULT_BROWSER_LANGUAGE : language = window?.navigator?.language.startsWi
 
 //  API REQUESTS
 const CHARACTER_LIMIT = 5000;
-const DEBOUNCE_RATE = 1000;
+const DEBOUNCE_RATE = 2000;
 
 const TRANSLATION_NOT_FOUND_MESSAGE = 'react-g-translator: Err 404: No translation found. Check `to` & `from` props.';
 

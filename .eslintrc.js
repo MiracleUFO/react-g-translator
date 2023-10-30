@@ -53,4 +53,7 @@ module.exports = {
     ],
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
+  globals: {
+    RequestInit: true,
+  },
 };
