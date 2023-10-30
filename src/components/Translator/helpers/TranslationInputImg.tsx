@@ -36,12 +36,9 @@ const TranslationInputImg = ({
 
       const {
         data,
-        error,
         isError,
         isLoading,
       } = useTranslation(toBeTranslated, from, to);
-
-      if (error) return <>{node}</>;
 
       const translatedText = determineRenderedText(
         toBeTranslated,

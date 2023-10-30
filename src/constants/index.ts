@@ -1,4 +1,4 @@
-import { QueryClientConfig, QueryCache } from 'react-query';
+import { QueryClientConfig } from 'react-query';
 import language from '../types/language';
 
 const { NODE_ENV, TEST_TRANSLATE_API_PROXY } = process.env;
@@ -21,16 +21,9 @@ const DEFAULT_PROPS = {
 const ONE_DAY_IN_MS = 24 * (60 * 60 * 1000);
 
 const DEFAULT_QUERY_OPTIONS: QueryClientConfig = {
-  queryCache: new QueryCache({
-    onError: (error, query) => {
-      if (!query.state.data) {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      }
-    },
-  }),
   defaultOptions: {
     queries: {
+      retry: 3,
       staleTime: ONE_DAY_IN_MS,
       cacheTime: ONE_DAY_IN_MS,
     },

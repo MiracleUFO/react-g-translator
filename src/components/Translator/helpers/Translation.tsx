@@ -19,12 +19,9 @@ const Translation = ({
 }) => {
   const {
     data,
-    error,
     isError,
     isLoading,
   } = useTranslation(text, from, to);
-
-  if (error) return <>{text}</>;
 
   const translatedText = determineRenderedText(
     text,
