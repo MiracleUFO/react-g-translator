@@ -9,14 +9,14 @@ import React, {
 } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import isVoidElement from '../../utils/isVoidElement';
-import { LanguageProvider } from '../../context/languageContext';
+import isVoidElement from '../utils/isVoidElement';
+import { LanguageProvider } from '../context/languageContext';
 
 import Translation from './helpers/Translation';
-import TranslationInputImg from './helpers/TranslationInputImg';
+import TranslationInputImg from './helpers/TranslationInputImage';
 
-import { DEFAULT_PROPS, DEFAULT_QUERY_OPTIONS } from '../../constants';
-import language from '../../types/language';
+import { DEFAULT_PROPS, DEFAULT_QUERY_OPTIONS } from '../constants';
+import language from '../types/language';
 
 const queryClient = new QueryClient(DEFAULT_QUERY_OPTIONS);
 
@@ -40,7 +40,13 @@ const recursivelyTranslate = (
   }
 
   if (Children.count(node) === 0 || isVoidElement(node)) {
-    return node;
+    return (
+      <>
+        &nbsp;
+        {node}
+        &nbsp;
+      </>
+    );
   }
 
   if (isValidElement(node)) {

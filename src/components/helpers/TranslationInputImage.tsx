@@ -6,13 +6,13 @@ import React, {
   isValidElement,
 } from 'react';
 
-import determineRenderedText from '../../../utils/determineRenderedText';
-import useTranslation from '../../../queries/useTranslation';
+import determineRenderedText from '../../utils/determineRenderedText';
+import useTranslation from '../../queries/useTranslation';
 
-import { DEFAULT_PROPS } from '../../../constants';
-import language from '../../../types/language';
+import { DEFAULT_PROPS } from '../../constants';
+import language from '../../types/language';
 
-const TranslationInputImg = ({
+const TranslationInputImage = ({
   node,
   from,
   to,
@@ -56,6 +56,6 @@ const TranslationInputImg = ({
   return <>{node}</>;
 };
 
-TranslationInputImg.defaultProps = DEFAULT_PROPS;
+TranslationInputImage.defaultProps = DEFAULT_PROPS;
 
-export default TranslationInputImg;
+export default TranslationInputImage;

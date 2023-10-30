@@ -5,7 +5,7 @@ const isVoidElement = (
 ) => {
   // List of known void elements
   const voidElements = [
-    'area', 'base', 'br', 'col', 'embed', 'hr', 'link', 'meta', 'param', 'source', 'track', 'wbr',
+    'area', 'base', 'br', 'col', 'embed', 'hr', 'link', 'meta', 'param', 'source', 'track', 'wbr', 'abbr', 'code',
   ];
 
   if (isValidElement(node)) return (voidElements.includes(node.type as string));

@@ -10,6 +10,7 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
 - Allows to set defualt language and destination language in code.
 - Translates entire pages and just text.
+- Translates `input` and `textarea` element placeholder as well as `img` (image) alt text.
 - Allows for custom language list files. (Coming in v2.0.0)
 
 ## Install
@@ -22,7 +23,7 @@ or with yarn
 ## Usage
 
 > DISCLAIMER!
-To be 100% legal please use the official [Google Translate API](https://cloud.google.com/translate). This project is mainly for pet projects and prototyping 😉. Also, only use the most recent version of this package.
+To be 100% legal please use the official [Google Translate API](https://cloud.google.com/translate). This project is mainly for pet projects and prototyping 😉. Always only use the most **recent version** of this package. This server is also very limited, for use in **production** see [PRODUCTION USAGE.](#production-usage)
 
 ### To translate whole component:
 ```jsx
@@ -30,10 +31,13 @@ import Translator from '@miracleufo/react-g-translator';
 
 return (
   <Translator from='en' to='es'>
-    <App />
+    <div>
+      ...
+    </div>
   </Translator>
 );
 ```
+**NB:** Each non-void React element is translated like a paragraph, for best translation please avoid <br /> and use <p> instead; and end sentences with fullstop. **`<Translator />` `from` and `to` props will always override [`<Translate />`](#to-translate-specific-text-inline) `from` and `to` props.**
 
 ### To translate specific text inline:
 ```jsx
@@ -66,12 +70,12 @@ return (
 ### Props
  - `from`: Language the text(s) is provided in. Optional.
     - Defaults to "en".
-    - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages), will default to "en".
+    - *Type string*. String provided must be found in [supported languages.](https://cloud.google.com/translate/docs/languages)
     - Overriden by [`setLanguageFrom`](#hook-setlanguagefrom) hook. (Coming in V2)
 
   - `to`: Language to translate to. Optional.
     - Defaults to *user's current browser language setting*.
-    - *Type string*. If string provided is not found in [supported languages](https://cloud.google.com/translate/docs/languages) will default to  *user's current browser language setting*.
+    - *Type string*. String provided must be found in [supported languages.](https://cloud.google.com/translate/docs/languages)
     - Overriden by [`setLanguageTo`](#hook-setlanguageto) hook. (Coming in V2)
 
  - `shouldFallback`: Determines error handling. Available in `<Translate />` and `<Translator />`, when error, displays original text when `shouldFallback` is true, or empty string otherwise. Optional.
@@ -118,25 +122,33 @@ See [Usage](#to-get-translation-of-text-directly)
 - For every UNIQUE `text`, `to`, and `from` [(props)](#props) combination the translation is fetched & cached for 24 hours (as long as QueryClient is not destroyed,) this is to prevent unnecessary requests.
 - QueryClient is destroyed in this case ONLY when the web page is reloaded.
 
-
 ## Special Cases
 
 - [`from`](#props) and [`to`](#props) being the same will return original text (determined by google translation API.)
 - [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser language setting* respectively.
 - `text` is not in the [`from`](#props) language and google translate API cannot detect language automatically, it will return the original text. 
 
+## Production Usage:
+The server for this package is very limited and may not meet your projects' needs, to aid package use in production:
+  - **FORK** the server at this [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express).
+  - Host the server, then in the environment file(s) (`.env.*`) of the React project assign the hosted server's url/address to `REACT_APP_TRANSLATE_SERVER_TOKEN`.
+  - To enable authentication, you can protect your server by editing code in the server [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express) see [this](https://christiangiacomi.com/posts/express-barer-strategy) for help, once authorisation code is running on server assign the server's authentication token to `REACT_APP_TRANSLATE_SERVER_TOKEN` in the React projects' environment file(s) (`.env.*`)
+  - **NB**: You will need a **MONGODB ATLAS CLUSTER** to run the server successfully. [Create one](https://www.mongodb.com/docs/guides/atlas/cluster), and assign the Atlas cluster's credentials to `MONGOOSE_ATLAS_CONNECTION_STRING` & `MONGOOSE_ATLAS_PASSWORD` in your **server's** environment file (keep this private.)
+  - Also, if **delay** between requests is too long, edit [this](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/index.ts#L42) and/or [this](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/utils/delayRequests.ts#L17-L19) in your server.
+
 ## Developer Testing
 - [Install node-modules](#install)
 - `npm run test` or `yarn run test`
 - **Note**
   - Some tests in `src/tests` may fail because google translate API might return synonyms when a string is translated multiple times.
-  - If `TooManyRequestsError` or Error Code `429` is encountered, use PROXY by updating `env` variable `TRANSLATE_API_PROXY` with a correct [proxy](https://free-proxy-list.net/) (with yes in Google column.) This error is due to Google Translate APIs rate limiting per IP address (this limit seems variable, see [discussion.](https://github.com/vitalets/google-translate-api/issues/107#issuecomment-1302220214)) Switching internet providers may also solve this (temporarily.)
+  - If `TooManyRequestsError` or Error Code `429` is encountered, this issue is due to Google Translate APIs rate limiting per IP address (this limit seems variable, see [discussion.](https://github.com/vitalets/google-translate-api/issues/107#issuecomment-1302220214)) Switching internet providers may solve this (temporarily.)
   - [**Caching**](#caching) is **OFF** by default in testing, to turn **ON**, replace `QUERY_DEFAULT_OPTIONS` in `tests/constants-test.ts` with:
 ```js
 const ONE_DAY_IN_MS = 24 * (60 * 60 * 1000);
 const DEFAULT_QUERY_OPTIONS = {
   defaultOptions: {
     queries: {
+      retry: false,
       staleTime: ONE_DAY_IN_MS,
       cacheTime: ONE_DAY_IN_MS,
     },

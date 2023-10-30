@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
-import determineRenderedText from '../../../utils/determineRenderedText';
-import useTranslation from '../../../queries/useTranslation';
+import determineRenderedText from '../../utils/determineRenderedText';
+import useTranslation from '../../queries/useTranslation';
 
-import { DEFAULT_PROPS } from '../../../constants';
-import language from '../../../types/language';
+import { DEFAULT_PROPS } from '../../constants';
+import language from '../../types/language';
 
 const Translation = ({
   text,
