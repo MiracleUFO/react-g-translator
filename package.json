@@ -1,6 +1,6 @@
 {
   "name": "@miracleufo/react-g-translator",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A modern, free, lightweight npm package for translating react apps (component wrapper.) No API keys or language list files are required.",
   "author": "Miracle Ufodiama",
   "license": "MIT",

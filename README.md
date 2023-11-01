@@ -40,7 +40,7 @@ const Component = () => {
   );
 }
 ```
-**NB:** Each non-void React element is translated like a paragraph, for best translation please avoid `<br />` and use `<p>` instead, and always end sentences with fullstop.
+Each non-void React element is translated like a paragraph, for best translation please avoid `<br />` and use `<p>` instead, and always end sentences with fullstop.
 
 ### To translate specific text inline:
 ```jsx
@@ -138,7 +138,7 @@ See [Usage](#to-get-translation-of-text-directly)
 ## Production Usage:
 The server for this package is very limited and may not meet your projects' needs, to aid package use in production:
   - **FORK** the server at this [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express).
-  - **NB**: You will need a **MONGODB ATLAS CLUSTER** to run the server successfully. [Create one for free](https://www.mongodb.com/docs/guides/atlas/cluster), and assign the Atlas cluster's credentials to `MONGOOSE_ATLAS_CONNECTION_STRING` & `MONGOOSE_ATLAS_PASSWORD` in your **server's** environment file (keep this private.)
+  - You will need a **MONGODB ATLAS CLUSTER** to run the server successfully for rate limiting. [Create one for free](https://www.mongodb.com/docs/guides/atlas/cluster), and assign the Atlas cluster's credentials to `MONGOOSE_ATLAS_CONNECTION_STRING` & `MONGOOSE_ATLAS_PASSWORD` in your **server's** environment file (keep this private.)
   - Host the forked server. In the environment file(s) (`.env.*`) of the React project assign the hosted server's URL/address to `REACT_APP_TRANSLATE_SERVER_TOKEN`.
   - To enable authentication, you can protect your server by editing code in the server [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express) see [this](https://christiangiacomi.com/posts/express-barer-strategy) for help, once authorisation code is running on server assign the server's authentication token to `REACT_APP_TRANSLATE_SERVER_TOKEN` in the React projects' environment file(s) (`.env.*`)
   - Also, if **delay** between requests is too long, remove [sleep](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/index.ts#L42) and/or edit [delay](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/utils/delayRequests.ts#L17-L19) in your server.
