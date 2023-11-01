@@ -23,21 +23,24 @@ or with yarn
 ## Usage
 
 > DISCLAIMER!
-To be 100% legal please use the official [Google Translate API](https://cloud.google.com/translate). This project is mainly for pet projects and prototyping 😉. Always only use the most **recent version** of this package. This server is also very limited, for use in **production** see [PRODUCTION USAGE.](#production-usage)
+To be 100% legal please use the official [Google Translate API](https://cloud.google.com/translate). This project is mainly for pet projects and prototyping 😉. The server is very limited, for use in **production** see [PRODUCTION USAGE.](#production-usage) Always only use the most **recent version** of this package.
 
 ### To translate whole component:
 ```jsx
 import Translator from '@miracleufo/react-g-translator';
 
-return (
-  <Translator from='en' to='es'>
-    <div>
-      ...
-    </div>
-  </Translator>
-);
+const Component = () => {
+  ...
+  return (
+    <Translator from='en' to='es'>
+      <div>
+        ...
+      </div>
+    </Translator>
+  );
+}
 ```
-**NB:** Each non-void React element is translated like a paragraph, for best translation please avoid <br /> and use <p> instead; and end sentences with fullstop. **`<Translator />` `from` and `to` props will always override [`<Translate />`](#to-translate-specific-text-inline) `from` and `to` props.**
+**NB:** Each non-void React element is translated like a paragraph, for best translation please avoid <br /> and use <p> instead, and always end sentences with fullstop.
 
 ### To translate specific text inline:
 ```jsx
@@ -46,8 +49,12 @@ import { Translate } from '@miracleufo/react-g-translator';
 return (
   <div>
     ...
-    <p>Hello.</p>
-    <p><Translate from='en' to='fr'>Hello in French.</Translate></p>
+    <Translate from='en' to='fr'>Hello in French.</Translate>
+    {/* Can also be used within elements */}
+    <p>
+      <Translate from='en' to='de'>Welcome in German.</Translate>
+      Happy to meet you.
+    </p>
     ...
   </div>
 );

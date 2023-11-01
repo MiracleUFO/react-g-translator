@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, {
   JSX,
   ReactNode,
@@ -50,6 +49,11 @@ const recursivelyTranslate = (
   }
 
   if (isValidElement(node)) {
+    //  skip translation if functional component
+    //  for scoping of `to` & `from` props in nested components
+    //  (also applies to nested <Translator /> and <Translate /> wrappers)
+    if (typeof node.type === 'function') return node;
+
     if (node.type === 'textarea' || node.type === 'input' || node.type === 'img') {
       return (
         <TranslationInputImg
@@ -77,7 +81,7 @@ const Translator = ({
   to,
   shouldFallback,
 }: {
-  children: ReactNode | React.ReactElement<any, any> | Element | JSX.Element;
+  children: ReactNode | ReactElement<any, any> | Element | JSX.Element;
   from?: language;
   to?: language;
   shouldFallback?: boolean;
