@@ -3,9 +3,8 @@ import sha256 from 'crypto-js/sha256';
 
 import { useLanguageContext } from '../context/languageContext';
 
-import getTranslation from '../utils/getTranslation';
-import getErrorInTranslationMessage from '../utils/getErrorInTranslationMessage';
 import language from '../types/language';
+import getTranslation from '../utils/getTranslation';
 
 const useTranslation = (
   text: string,
@@ -21,12 +20,6 @@ const useTranslation = (
   } = useQuery<string | undefined>(
     sha256(`${text}-${from}-${to}`).toString(),
     () => getTranslation(text, from || languageFrom, to || languageTo),
-    {
-      //  more descriptive error than react-query error
-      onError: (err: unknown) => {
-        console.error(getErrorInTranslationMessage(err));
-      },
-    },
   );
 
   return {

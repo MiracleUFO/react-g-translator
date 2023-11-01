@@ -51,6 +51,11 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-no-useless-fragment': 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  },
+  globals: {
+    RequestInit: true,
   },
 };
