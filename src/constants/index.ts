@@ -1,17 +1,27 @@
 import { QueryClientConfig } from 'react-query';
+
 import language from '../types/language';
 
-const { NODE_ENV, REACT_APP_TRANSLATE_SERVER_URL, REACT_APP_TRANSLATE_SERVER__TOKEN } = process.env;
+/* eslint-disable prefer-destructuring */
+//  prefer not destructuring due to Nextjs webpack issues
+//  see: https://github.com/vercel/next.js/issues/19420
+const REACT_APP_TRANSLATE_SERVER_URL = process.env.REACT_APP_TRANSLATE_SERVER_URL;
+const REACT_APP_TRANSLATE_SERVER_TOKEN = process.env.REACT_APP_TRANSLATE_SERVER_TOKEN;
+const VITE_APP_TRANSLATE_SERVER_URL = process.env.VITE_APP_TRANSLATE_SERVER_URL;
+const VITE_APP_TRANSLATE_SERVER_TOKEN = process.env.VITE_APP_TRANSLATE_SERVER_TOKEN;
+const NEXT_PUBLIC_APP_TRANSLATE_SERVER_URL = process.env.NEXT_PUBLIC_APP_TRANSLATE_SERVER_URL;
+const NEXT_PUBLIC_APP_TRANSLATE_SERVER_TOKEN = process.env.NEXT_PUBLIC_APP_TRANSLATE_SERVER_TOKEN;
 
 // NODE ENVIRONMENT
-const NODE_DEVELOPMENT = 'development';
 const NODE_TEST = 'test';
+const NODE_DEVELOPMENT = 'development';
+const NODE_ENV = process.env.NODE_ENV;
 const IS_DEVELOPMENT_OR_TEST = NODE_ENV && [NODE_DEVELOPMENT, NODE_TEST].includes(NODE_ENV);
 
 const PROXY_URL = 'https://react-g-translator-proxy-express.onrender.com/translate';
 const PROXY_URL_ALT = 'https://react-g-translator-proxy.vercel.app/api';
-const SERVER_URL = REACT_APP_TRANSLATE_SERVER_URL || '';
-const SERVER_TOKEN = REACT_APP_TRANSLATE_SERVER__TOKEN || '';
+const SERVER_URL = REACT_APP_TRANSLATE_SERVER_URL || VITE_APP_TRANSLATE_SERVER_URL || NEXT_PUBLIC_APP_TRANSLATE_SERVER_URL || '';
+const SERVER_TOKEN = REACT_APP_TRANSLATE_SERVER_TOKEN || VITE_APP_TRANSLATE_SERVER_TOKEN || NEXT_PUBLIC_APP_TRANSLATE_SERVER_TOKEN || '';
 
 const ONE_DAY_IN_MS = 24 * (60 * 60 * 1000);
 
@@ -26,9 +36,12 @@ const DEFAULT_QUERY_OPTIONS: QueryClientConfig = {
 };
 
 const DEFAULT_LANGUAGE_FROM: language = 'en';
-const DEFAULT_BROWSER_LANGUAGE : language = window?.navigator?.language.startsWith('zh')
-  ? window?.navigator?.language as language
-  : window?.navigator?.language.split('-')[0] as language;
+// eslint-disable-next-line no-nested-ternary
+const DEFAULT_BROWSER_LANGUAGE : language = (typeof window !== 'undefined') ? (
+  window?.navigator?.language.startsWith('zh')
+    ? window?.navigator?.language as language
+    : window?.navigator?.language.split('-')[0] as language
+) : 'en';
 
 const DEFAULT_PROPS = {
   from: 'en',
