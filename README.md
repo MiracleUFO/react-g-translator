@@ -6,7 +6,7 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 - Enables Web Internationalisation (i18n) and Accessibility (a11y)
 - Auto language detection
 - Spelling and Language correction
-- Supports Next.js ▲ and [Vite ⚡️](#vite-⚡️-usage)
+- Supports Next.js ▲ and Vite ⚡️ (see [Vite ⚡️ usage](#vite-⚡️-usage))
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
 - Allows to set default language and destination language in code
 - Translates entire pages and just text
@@ -99,7 +99,7 @@ return (
 ### Wrapper: `<Translator />` ###
   *Type:* React functional component
 
-  *Note:* **Directly wraps a valid Provider or a jsx parent (not text.)**
+  *Note:* **Directly wraps a valid jsx parent/element (not text and not another functional component.)**
 
   *Props:*
   - [`from`](#props) *optional*
@@ -141,7 +141,7 @@ See [Usage](#to-get-translation-of-text-directly)
 - [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser language setting* respectively.
 - `text` is not in the [`from`](#props) language and google translate API cannot detect language automatically, it will return the original text. 
 
-## Vite ⚡️ Usage:
+## Vite ⚡️ Usage
 Vite does not have the `process` global, to polyfill this in Vite projects, in the `vite.config.js` or `vite.config.ts` file install and include `vite-plugin-env-compatible` package as shown to load env variables correctly, or error `Uncaught ReferenceError: process is not defined` will be thrown.
 ```jsx
 import { defineConfig } from 'vite'
@@ -162,7 +162,7 @@ export default defineConfig({
 });
 ```
 
-## Production Usage:
+## Production Usage
 The server for this package is very limited and may not meet your projects' needs, to aid package use in production:
   - **FORK** the server at this [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express).
   - You will need a **MONGODB ATLAS CLUSTER** to run the server successfully for rate limiting. [Create one for free](https://www.mongodb.com/docs/guides/atlas/cluster), and assign the Atlas cluster's credentials to `MONGOOSE_ATLAS_CONNECTION_STRING` & `MONGOOSE_ATLAS_PASSWORD` in your **server's** environment file (keep this private.)
