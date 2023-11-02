@@ -1,5 +1,6 @@
 import React, {
   JSX,
+  useMemo,
   ReactNode,
   ReactElement,
   Children,
@@ -25,7 +26,7 @@ const recursivelyTranslate = (
   to?: language,
   shouldFallback?: boolean,
 ): ReactNode => {
-  if (typeof node === 'string' && !node) return node;
+  if ((typeof node === 'string' && !node)) return node;
 
   if (typeof node === 'string') {
     return (
@@ -38,7 +39,7 @@ const recursivelyTranslate = (
     );
   }
 
-  if (Children.count(node) === 0 || isVoidElement(node)) {
+  if (Children.count(node) === 0 || isVoidElement(node) || typeof node === 'number') {
     return (
       <>
         &nbsp;
@@ -85,13 +86,25 @@ const Translator = ({
   from?: language;
   to?: language;
   shouldFallback?: boolean;
-}) => (
-  <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      {recursivelyTranslate(<>{children}</>, from, to, shouldFallback)}
-    </LanguageProvider>
-  </QueryClientProvider>
-);
+}) => {
+  //  memoised to eliminate unnecessary re-renders
+  const translatedChildren = useMemo(() => (
+    recursivelyTranslate(
+      <>{children}</>,
+      from,
+      to,
+      shouldFallback,
+    )
+  ), [children, from, to, shouldFallback]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
+        {translatedChildren}
+      </LanguageProvider>
+    </QueryClientProvider>
+  );
+};
 
 Translator.defaultProps = DEFAULT_PROPS;
 
