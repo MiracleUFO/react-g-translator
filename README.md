@@ -6,7 +6,7 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 - Enables Web Internationalisation (i18n) and Accessibility (a11y)
 - Auto language detection
 - Spelling and Language correction
-- Supports Next.js ▲ and Vite ⚡️ (see [Vite ⚡️ usage](#vite-⚡️-usage))
+- Supports Next.js ▲ and Vite ⚡️ (see [Vite ⚡️ usage](#vite-usage))
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
 - Allows to set default language and destination language in code
 - Translates entire pages and just text
@@ -42,7 +42,7 @@ const Component = () => {
 ```
 
 #### For best use of [`<Translator />`](#to-translate-whole-component):
-- The `<Translator />` wrapper will only translate React non-void elements that are not components themselves (i.e A parent component will not translate children components. It will only translate other React non-void elements inside it, this is for improved scoping of the wrapper's `from` and `to` props.)
+- The `<Translator />` wrapper will only translate React non-void elements and fragments that are not components themselves (i.e A parent component will not translate children components. It will only translate other React non-void elements or fragments inside it, this is for improved scoping of the wrapper's `from` and `to` props.)
 -  Each non-void React element is translated like a paragraph, for best translation please avoid `<br />` and use `<p>` instead, and always end sentences with fullstop.
 - If **spacing** is needed before or after an **inline element**, it should be written as `{' '}` (JSX) this is because translation removes all starting or ending spacing it deems unnecessary.
 -  To opt out of translating a variable wrap it in either the `<code>` or `<var>` element. Variables of type `number` are not translated by default. Keyboard inputs you don't want translated should be wrapped in `<kbd>`. 
@@ -53,7 +53,7 @@ const Component = () => {
 import { Translate } from '@miracleufo/react-g-translator';
 
 return (
-  <div>
+  <>
     ...
     <Translate from='en' to='fr'>Hello in French.</Translate>
     {/* Can also be used within elements */}
@@ -62,7 +62,7 @@ return (
       Happy to meet you.
     </p>
     ...
-  </div>
+  </>
 );
 ```
 
@@ -166,8 +166,9 @@ export default defineConfig({
 The server for this package is very limited and may not meet your projects' needs, to aid package use in production:
   - **FORK** the server at this [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express).
   - You will need a **MONGODB ATLAS CLUSTER** to run the server successfully for rate limiting. [Create one for free](https://www.mongodb.com/docs/guides/atlas/cluster), and assign the Atlas cluster's credentials to `MONGOOSE_ATLAS_CONNECTION_STRING` & `MONGOOSE_ATLAS_PASSWORD` in your **server's** environment file (keep this private.)
+  - If you choose to **remove rate limiting entirely** then a **MONGODB ATLAS CLUSTER** will not be needed, to do this remove these [lines](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/index.ts#L28-L29) and this [line](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/index.ts#L56) in your fork code. This is not recommended because IP will be banned more frequently by the translation service.
   - Host the forked server. In the environment file(s) (`.env.*`) of the React project assign the hosted server's URL/address to `REACT_APP_TRANSLATE_SERVER_URL` OR `VITE_APP_TRANSLATE_SERVER_URL` (if using Vite ⚡️) OR `NEXT_PUBLIC_APP_TRANSLATE_SERVER_URL` (if using Next.js ▲.)
-  - To enable **AUTHENTICATION**, you can protect your server by editing code in the server [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express) see [this](https://christiangiacomi.com/posts/express-barer-strategy) for help, once authorisation code is running on server assign the server's authentication token to `REACT_APP_TRANSLATE_SERVER_TOKEN` or `VITE_APP_TRANSLATE_SERVER_TOKEN` (if using Vite ⚡️) OR `NEXT_PUBLIC_APP_TRANSLATE_SERVER_TOKEN` (if using Next.js ▲) in the React projects' environment file(s) (`.env.*`)
+  - To enable **AUTHENTICATION**, you can protect your server if you want by editing code in the server [repo](https://github.com/MiracleUFO/react-g-translator-proxy-express) see [this](https://christiangiacomi.com/posts/express-barer-strategy) for help, once authorisation code is running on server assign the server's authentication token to `REACT_APP_TRANSLATE_SERVER_TOKEN` or `VITE_APP_TRANSLATE_SERVER_TOKEN` (if using Vite ⚡️) OR `NEXT_PUBLIC_APP_TRANSLATE_SERVER_TOKEN` (if using Next.js ▲) in the React projects' environment file(s) (`.env.*`)
   - Also, if **delay** between requests is too long, remove [sleep](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/index.ts#L42) and/or edit [delay](https://github.com/MiracleUFO/react-g-translator-proxy-express/blob/main/src/utils/delayRequests.ts#L17-L19) in your server.
 
 ## Developer Testing
