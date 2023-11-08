@@ -6,7 +6,7 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 - Enables Web Internationalisation (i18n) and Accessibility (a11y)
 - Auto language detection
 - Spelling and Language correction
-- Supports Next.js ▲ and Vite ⚡️ (see [Vite ⚡️ usage](#vite-usage))
+- Supports Next.js ▲ and Vite ⚡️ (see [Vite ⚡️ usage](#vite-&#9889;-usage))
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
 - Allows to set default language and destination language in code
 - Translates entire pages and just text
@@ -141,7 +141,7 @@ See [Usage](#to-get-translation-of-text-directly)
 - [`from`](#props) and [`to`](#props) being empty strings will be extrapolated from 'en' and *user's current browser language setting* respectively.
 - `text` is not in the [`from`](#props) language and google translate API cannot detect language automatically, it will return the original text. 
 
-## Vite ⚡️ Usage
+## Vite &#9889; Usage
 Vite does not have the `process` global, to polyfill this in Vite projects, in the `vite.config.js` or `vite.config.ts` file install and include `vite-plugin-env-compatible` package as shown to load env variables correctly, or error `Uncaught ReferenceError: process is not defined` will be thrown.
 ```jsx
 import { defineConfig } from 'vite'
