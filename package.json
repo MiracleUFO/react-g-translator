@@ -3,7 +3,7 @@
   "version": "1.2.3",
   "description": "A modern, free, lightweight npm package for translating react apps (component wrapper.) No API keys or language list files are required.",
   "author": "Miracle Ufodiama",
-  "license": "MIT",
+  "license": "MS-PL",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "unpkg": "dist/index.min.js",
