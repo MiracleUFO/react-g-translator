@@ -89,6 +89,7 @@
     "jsdom": "20.0.3",
     "jsdom-global": "3.0.2",
     "prettier": "^3.0.3",
+    "react-scripts": "^5.0.1",
     "rimraf": "^5.0.5",
     "rollup": "^3.29.4",
     "rollup-plugin-dts": "^6.0.2",
@@ -116,7 +117,6 @@
     "lodash": "^4.17.21",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
