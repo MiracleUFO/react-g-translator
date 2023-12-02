@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import sha256 from 'crypto-js/sha256';
 
 import { useLanguageContext } from '../context/languageContext';
@@ -17,10 +17,10 @@ const useTranslation = (
     error,
     isError,
     isLoading,
-  } = useQuery<string | undefined>(
-    sha256(`${text}-${from}-${to}`).toString(),
-    () => getTranslation(text, from || languageFrom, to || languageTo),
-  );
+  } = useQuery<string | undefined>({
+    queryKey: [sha256(`${text}-${from}-${to}`).toString()],
+    queryFn: () => getTranslation(text, from || languageFrom, to || languageTo),
+  });
 
   return {
     data,

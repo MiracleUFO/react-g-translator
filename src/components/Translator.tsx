@@ -7,7 +7,7 @@ import React, {
   cloneElement,
   isValidElement,
 } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import isVoidElement from '../utils/isVoidElement';
 import { LanguageProvider } from '../context/languageContext';
