@@ -1,4 +1,4 @@
-import { QueryClientConfig } from 'react-query';
+import { QueryClientConfig } from '@tanstack/react-query';
 
 import language from '../types/language';
 
@@ -30,7 +30,6 @@ const DEFAULT_QUERY_OPTIONS: QueryClientConfig = {
     queries: {
       retry: 3,
       staleTime: ONE_DAY_IN_MS,
-      cacheTime: ONE_DAY_IN_MS,
     },
   },
 };
