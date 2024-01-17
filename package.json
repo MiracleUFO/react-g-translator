@@ -111,7 +111,7 @@
   "dependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@tanstack/react-query": "^5.12.2",
-    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/jest-dom": "^6.1.6",
     "@testing-library/react": "^14.1.2",
     "crypto-js": "^4.2.0",
     "lodash": "^4.17.21",
