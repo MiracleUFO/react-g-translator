@@ -4,6 +4,7 @@ import {
   PROXY_URL_ALT,
   SERVER_URL,
   SERVER_TOKEN,
+  PROXY_URL_RENDER,
 } from '../constants';
 import language from '../types/language';
 
@@ -29,6 +30,11 @@ const translate = async (text: string, from?: language, to?: language) => {
   response = await fetch(SERVER_URL || PROXY_URL, requestOptions);
 
   if (response.status !== 200) response = await fetch(SERVER_URL || PROXY_URL_ALT, requestOptions);
+
+  if (response.status !== 200) {
+    // unstable (fallback) server
+    response = await fetch(SERVER_URL || PROXY_URL_RENDER, requestOptions);
+  }
 
   if (response.status === 200) return response.json();
 

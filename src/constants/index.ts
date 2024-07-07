@@ -18,8 +18,9 @@ const NODE_DEVELOPMENT = 'development';
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEVELOPMENT_OR_TEST = NODE_ENV && [NODE_DEVELOPMENT, NODE_TEST].includes(NODE_ENV);
 
-const PROXY_URL = 'https://react-g-translator-proxy-express.onrender.com/translate';
-const PROXY_URL_ALT = 'https://react-g-translator-proxy.vercel.app/api';
+const PROXY_URL = 'https://react-g-translator-proxy.vercel.app/api';
+const PROXY_URL_ALT = 'https://react-g-translator-proxy-2.vercel.app/api';
+const PROXY_URL_RENDER = 'https://react-g-translator-proxy-express.onrender.com/translate';
 const SERVER_URL = REACT_APP_TRANSLATE_SERVER_URL || VITE_APP_TRANSLATE_SERVER_URL || NEXT_PUBLIC_APP_TRANSLATE_SERVER_URL || '';
 const SERVER_TOKEN = REACT_APP_TRANSLATE_SERVER_TOKEN || VITE_APP_TRANSLATE_SERVER_TOKEN || NEXT_PUBLIC_APP_TRANSLATE_SERVER_TOKEN || '';
 
@@ -60,6 +61,7 @@ export {
   IS_DEVELOPMENT_OR_TEST,
   PROXY_URL,
   PROXY_URL_ALT,
+  PROXY_URL_RENDER,
   SERVER_URL,
   SERVER_TOKEN,
   DEFAULT_PROPS,
