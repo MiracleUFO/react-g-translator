@@ -7,6 +7,7 @@ import {
   PROXY_URL_RENDER,
 } from '../constants';
 import language from '../types/language';
+import isBadResponse from './isBadResponse';
 
 const translate = async (text: string, from?: language, to?: language) => {
   const requestOptions = {
@@ -26,12 +27,11 @@ const translate = async (text: string, from?: language, to?: language) => {
     ),
   } as RequestInit;
 
-  let response;
-  response = await fetch(SERVER_URL || PROXY_URL, requestOptions);
+  let response = await fetch(SERVER_URL || PROXY_URL, requestOptions);
 
-  if (response.status !== 200) response = await fetch(SERVER_URL || PROXY_URL_ALT, requestOptions);
+  if (isBadResponse(response)) response = await fetch(SERVER_URL || PROXY_URL_ALT, requestOptions);
 
-  if (response.status !== 200) {
+  if (isBadResponse(response)) {
     // unstable (fallback) server
     response = await fetch(SERVER_URL || PROXY_URL_RENDER, requestOptions);
   }
