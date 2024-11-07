@@ -38,9 +38,9 @@ const DEFAULT_QUERY_OPTIONS: QueryClientConfig = {
 const DEFAULT_LANGUAGE_FROM: language = 'en';
 // eslint-disable-next-line no-nested-ternary
 const DEFAULT_BROWSER_LANGUAGE : language = (typeof window !== 'undefined') ? (
-  window?.navigator?.language.startsWith('zh')
+  window?.navigator?.language?.startsWith('zh')
     ? window?.navigator?.language as language
-    : window?.navigator?.language.split('-')[0] as language
+    : window?.navigator?.language?.split('-')[0] as language
 ) : 'en';
 
 const DEFAULT_PROPS = {
