@@ -7,6 +7,7 @@ A modern, *free*, *lightweight* npm package for translating react apps (pages an
 - Auto language detection
 - Spelling and Language correction
 - Supports Next.js ▲ and Vite ⚡️ (see [Vite ⚡️ usage](#vite--usage))
+- Support React Native (Beta)
 - Fast and reliable – it uses the same servers that [translate.google.com](https://translate.google.com) uses
 - Allows to set default language and destination language in code
 - Translates entire pages and just text
